@@ -1,12 +1,13 @@
 import { IoMdClose } from 'react-icons/io'
 import './index.css'
 import { useState } from 'react'
+import { getCurrentDate } from '../../../utils/currentDate'
 
 export const CreateProjectModal = ({ setCreateProject }) => {
   const [projectData, setProjectData] = useState({
     name: '',
     description: '',
-    startDate: null,
+    startDate: getCurrentDate(),
     endDate: null
   })
 
@@ -40,7 +41,7 @@ export const CreateProjectModal = ({ setCreateProject }) => {
           />
         </div>
         <div className='container-create-button'>
-          <button>Create project</button>
+          <button onClick={() => console.log(projectData)}>Create project</button>
         </div>
       </div>
     </div>

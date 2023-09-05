@@ -1,13 +1,13 @@
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import './index.css'
 import { CreateProjectModal } from './CreateProject'
-
-const projects = ['Project1', 'Project2', 'Project3']
+import { ProjectContext } from '../../context/project'
 
 export const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false)
   const [showCreateProject, setCreateProject] = useState(false)
+  const { projects } = useContext(ProjectContext)
 
   return (
     <div>

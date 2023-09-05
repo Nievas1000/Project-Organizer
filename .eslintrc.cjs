@@ -18,6 +18,6 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
-    "react/prop-types": ["warn", { ignore: ["setCreateProject"] }],
+    "react/prop-types": "off",
   },
 };

@@ -1,14 +1,13 @@
 import { HiPlus } from 'react-icons/hi'
 import './index.css'
-
-const tasks = [
-  { id: 1, title: 'Crear página de inicio', status: 'En progreso' },
-  { id: 2, title: 'Implementar funcionalidad de usuario', status: 'Pendiente' },
-  { id: 3, title: 'Pruebas de unidad', status: 'Completada' }
-  // Agrega más tareas aquí
-]
+import { useContext, useState } from 'react'
+import { CreateIssueModal } from './CreateIssue'
+import { ProjectContext } from '../../context/project'
 
 export const Home = () => {
+  const [showCreateIssue, setCreateIssue] = useState(false)
+  const { tasks } = useContext(ProjectContext)
+
   return (
     <div className='container-fluid pt-5'>
       <div>
@@ -28,8 +27,9 @@ export const Home = () => {
         </ul>
       </div>
       <div className='ms-3 pointer'>
-        <span><HiPlus /> Create issue</span>
+        <span onClick={() => setCreateIssue(true)}><HiPlus /> Create issue</span>
       </div>
+      {showCreateIssue && <CreateIssueModal setCreateIssue={setCreateIssue} />}
     </div>
   )
 }
