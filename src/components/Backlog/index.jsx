@@ -6,12 +6,12 @@ import { ProjectContext } from '../../context/project'
 
 export const Home = () => {
   const [showCreateIssue, setCreateIssue] = useState(false)
-  const { tasks } = useContext(ProjectContext)
+  const { tasks, selectedProject } = useContext(ProjectContext)
 
   return (
     <div className='container-fluid pt-5'>
       <div>
-        <h5>Projects / Project 1</h5>
+        <h5>Projects / {selectedProject}</h5>
         <h3>Backlog</h3>
       </div>
       <div className='task-list-container'>
