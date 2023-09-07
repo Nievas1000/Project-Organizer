@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
 
 export const ProjectContext = createContext()
@@ -5,15 +6,33 @@ export const ProjectContext = createContext()
 export const ProjectProvider = ({ children }) => {
   const [projects, setProjects] = useState()
   const [selectedProject, setSelectedProject] = useState()
-  const [tasks, setTasks] = useState([
-    { id: 1, title: 'Crear página de inicio', status: 'En progreso' },
-    { id: 2, title: 'Implementar funcionalidad de usuario', status: 'Pendiente' },
-    { id: 3, title: 'Pruebas de unidad', status: 'Completada' }
-  ])
+  const [tasks, setTasks] = useState([])
+
+  const getTasksByProject = async () => {
+    try {
+      if (selectedProject) {
+        const response = await axios.get(`http://localhost:3001/task/${selectedProject._id}`)
+        setTasks(response.data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
-    fetch('http://localhost:3001/project').then(response => response.json()).then(data => setProjects(data))
+    fetch('http://localhost:3001/project').then(response => response.json()).then(data => {
+      setProjects(data)
+      if (data.length > 0) {
+        setSelectedProject(data[0])
+      }
+    })
   }, [])
+
+  useEffect(() => {
+    if (selectedProject) {
+      getTasksByProject()
+    }
+  }, [selectedProject])
 
   const contextValue = {
     projects,

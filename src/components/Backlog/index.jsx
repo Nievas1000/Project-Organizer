@@ -3,33 +3,38 @@ import './index.css'
 import { useContext, useState } from 'react'
 import { CreateIssueModal } from './CreateIssue'
 import { ProjectContext } from '../../context/project'
+import { NoProject } from './NoProject'
 
 export const Home = () => {
   const [showCreateIssue, setCreateIssue] = useState(false)
-  const { tasks, selectedProject } = useContext(ProjectContext)
+  const { tasks, selectedProject, projects } = useContext(ProjectContext)
 
   return (
     <div className='container-fluid pt-5'>
-      <div>
-        <h5>Projects / {selectedProject}</h5>
-        <h3>Backlog</h3>
-      </div>
-      <div className='task-list-container'>
-        <ul className='task-list'>
-          {tasks.map((task) => (
-            <li key={task.id} className='task pointer'>
-              <div className='task-title'>{task.title}</div>
-              <div className={`task-status ${task.status.toLowerCase()}`}>
-                {task.status}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className='ms-3 pointer'>
-        <span onClick={() => setCreateIssue(true)}><HiPlus /> Create issue</span>
-      </div>
-      {showCreateIssue && <CreateIssueModal setCreateIssue={setCreateIssue} />}
+      {projects.length > 0
+        ? <div>
+          <div>
+            <h5>Projects / {selectedProject ? selectedProject.name : null}</h5>
+            <h3>Backlog</h3>
+          </div>
+          <div className='task-list-container'>
+            <ul className='task-list'>
+              {tasks.map((task) => (
+                <li key={task._id} className='task pointer'>
+                  <div className='task-title'>{task.name}</div>
+                  <div className={`task-status ${task.state.toLowerCase()}`}>
+                    {task.state}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className='ms-3 pointer'>
+            <span onClick={() => setCreateIssue(true)}><HiPlus /> Create issue</span>
+          </div>
+          {showCreateIssue && <CreateIssueModal setCreateIssue={setCreateIssue} />}
+        </div> //eslint-disable-line
+        : <NoProject />}
     </div>
   )
 }

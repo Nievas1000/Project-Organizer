@@ -17,7 +17,7 @@ export const Navbar = () => {
           {showMenu && (
             <ul className='project-menu'>
               {projects.map((project) => (
-                <li key={project._id} onClick={() => setSelectedProject(project.name)}>{project.name}</li>
+                <li key={project._id} onClick={() => setSelectedProject(project)}>{project.name}</li>
               ))}
             </ul>
           )}
