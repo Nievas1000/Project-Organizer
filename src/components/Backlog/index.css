@@ -9,27 +9,6 @@
     padding: 0;
 }
 
-.task {
-    background-color: #181818;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: solid 1px #202020;
-}
-
-.task-title {
-    background-color: #181818;
-}
-
-.task-status {
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
  
   
   

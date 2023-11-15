@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 import { CreateIssueModal } from './CreateIssue'
 import { ProjectContext } from '../../context/project'
 import { NoProject } from './NoProject'
+import { Issue } from './Issue'
 
 export const Home = () => {
   const [showCreateIssue, setCreateIssue] = useState(false)
@@ -11,7 +12,7 @@ export const Home = () => {
 
   return (
     <div className='container-fluid pt-5'>
-      {projects.length > 0
+      {projects && projects.length > 0
         ? <div>
           <div>
             <h5>Projects / {selectedProject ? selectedProject.name : null}</h5>
@@ -20,12 +21,7 @@ export const Home = () => {
           <div className='task-list-container'>
             <ul className='task-list'>
               {tasks.map((task) => (
-                <li key={task._id} className='task pointer'>
-                  <div className='task-title'>{task.name}</div>
-                  <div className={`task-status ${task.state.toLowerCase()}`}>
-                    {task.state}
-                  </div>
-                </li>
+                <Issue key={task._id} task={task} />
               ))}
             </ul>
           </div>

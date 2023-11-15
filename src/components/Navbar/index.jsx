@@ -7,13 +7,13 @@ import { ProjectContext } from '../../context/project'
 export const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false)
   const [showCreateProject, setCreateProject] = useState(false)
-  const { projects, setSelectedProject } = useContext(ProjectContext)
+  const { projects, setSelectedProject, selectedProject } = useContext(ProjectContext)
 
   return (
     <div>
       <div className='navbar-container d-flex pt-3'>
         <div className='d-flex'>
-          <p className='pointer' onClick={() => setShowMenu(!showMenu)}>Projects {showMenu ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</p>
+          <p className='pointer' onClick={() => setShowMenu(!showMenu)}>{selectedProject ? selectedProject.name : 'Projects'} {showMenu ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</p>
           {showMenu && (
             <ul className='project-menu'>
               {projects.map((project) => (

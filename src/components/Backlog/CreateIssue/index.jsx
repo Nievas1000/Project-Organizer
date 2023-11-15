@@ -37,7 +37,7 @@ export const CreateIssueModal = ({ setCreateIssue }) => {
         <div className='close-modal'>
           <IoMdClose className='pointer' onClick={() => setCreateIssue(false)} />
         </div>
-        <h3>Create project</h3>
+        <h3>Create issue</h3>
         <div className='form-group'>
           <h6>Name:</h6>
           <input type='text' name='name' value={issue.name} onChange={handleChange} />

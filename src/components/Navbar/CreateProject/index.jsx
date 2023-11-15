@@ -1,31 +1,9 @@
 import { IoMdClose } from 'react-icons/io'
 import './index.css'
-import { useState } from 'react'
-import { getCurrentDate } from '../../../utils/currentDate'
-import axios from 'axios'
+import { useProject } from '../../../hooks/useProject'
 
 export const CreateProjectModal = ({ setCreateProject }) => {
-  const [projectData, setProjectData] = useState({
-    name: '',
-    description: '',
-    startDate: getCurrentDate(),
-    endDate: null,
-    state: 'In progress'
-  })
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setProjectData({ ...projectData, [name]: value })
-  }
-
-  const createProject = async () => {
-    try {
-      const response = await axios.post('http://localhost:3001/project', projectData)
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const { handleChange, projectData, createProject } = useProject()
 
   return (
     <div className='container-create-project'>
