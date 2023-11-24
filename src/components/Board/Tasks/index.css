@@ -1,0 +1,15 @@
+.task-container{
+    text-align: left;
+    margin: 5%;
+    border-radius: 10px;
+    border: white solid 1px;
+}
+
+.task-container p{
+    margin: 5px;
+}
+
+.owner{
+    display: flex;
+    justify-content: right;
+}

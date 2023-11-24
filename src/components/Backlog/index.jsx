@@ -6,12 +6,12 @@ import { ProjectContext } from '../../context/project'
 import { NoProject } from './NoProject'
 import { Issue } from './Issue'
 
-export const Home = () => {
+export const Backlog = () => {
   const [showCreateIssue, setCreateIssue] = useState(false)
   const { tasks, selectedProject, projects } = useContext(ProjectContext)
 
   return (
-    <div className='container-fluid pt-5'>
+    <div className='col-md-10'>
       {projects && projects.length > 0
         ? <div>
           <div>

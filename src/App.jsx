@@ -1,9 +1,9 @@
-import { Home } from './components/Backlog'
+import { Home } from './components/Home'
 import { Navbar } from './components/Navbar'
 
 function App () {
   return (
-    <div className='app'>
+    <div className='app' style={{ backgroundColor: '#181818' }}>
       <Navbar />
       <Home />
     </div>
