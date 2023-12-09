@@ -7,6 +7,7 @@ export const ProjectProvider = ({ children }) => {
   const [projects, setProjects] = useState()
   const [selectedProject, setSelectedProject] = useState()
   const [tasks, setTasks] = useState([])
+  const [showBoardMobile, setShowBoardMobile] = useState(false)
 
   const getTasksByProject = async () => {
     try {
@@ -38,9 +39,11 @@ export const ProjectProvider = ({ children }) => {
     projects,
     tasks,
     selectedProject,
+    showBoardMobile,
     setProjects,
     setTasks,
-    setSelectedProject
+    setSelectedProject,
+    setShowBoardMobile
   }
 
   return (

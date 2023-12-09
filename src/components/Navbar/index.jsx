@@ -4,11 +4,13 @@ import './index.css'
 import { CreateProjectModal } from './CreateProject'
 import { ProjectContext } from '../../context/project'
 import logo from '../../assets/logo.png'
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { MobileNavigator } from './MobileNavigator'
 
 export const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false)
   const [showCreateProject, setCreateProject] = useState(false)
-  const { projects, setSelectedProject, selectedProject } = useContext(ProjectContext)
+  const { projects, setSelectedProject, selectedProject, showBoardMobile, setShowBoardMobile } = useContext(ProjectContext)
 
   const selectProject = (project) => {
     setSelectedProject(project)
@@ -32,11 +34,15 @@ export const Navbar = () => {
               </ul>
             )}
           </div>
-          <div className='ms-4'>
+          <div className='ms-4 d-none d-md-block'>
             <span onClick={() => setCreateProject(!showCreateProject)} className='create pointer'>Create</span>
           </div>
         </div>
+        <div className='position-absolute end-0 me-3 mt-3 d-bloc d-md-none pointer'>
+          <GiHamburgerMenu size={30} onClick={() => setShowBoardMobile(!showBoardMobile)} />
+        </div>
       </div>
+      {showBoardMobile && <MobileNavigator />}
       {showCreateProject && <CreateProjectModal setCreateProject={setCreateProject} />}
     </div>
   )

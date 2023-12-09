@@ -11,7 +11,7 @@ export const Backlog = () => {
   const { tasks, selectedProject, projects } = useContext(ProjectContext)
 
   return (
-    <div className='col-md-10'>
+    <div className='col-md-9 pt-5 position-absolute end-0'>
       {projects && projects.length > 0
         ? <div>
           <div>

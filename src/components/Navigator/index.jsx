@@ -1,18 +1,27 @@
 import { HiOutlineViewBoards } from 'react-icons/hi'
 import { TfiViewList } from 'react-icons/tfi'
 import { Link } from 'react-router-dom'
+import './index.css'
 
 export const Navigator = () => {
   return (
-    <div className='col-md-2 d-none d-md-block'>
-      <Link className='d-flex' to='/'>
-        <TfiViewList style={{ fontSize: '25px' }} className='mt-2' />
-        <h3 className='ms-4'>Backlog</h3>
-      </Link>
-      <Link className='d-flex mt-2' to='/board'>
-        <HiOutlineViewBoards style={{ fontSize: '25px' }} className='mt-2' />
-        <h3 className='ms-4'>Board</h3>
-      </Link>
-    </div>
+    <nav className='col-md-3 d-none d-md-block sidebar board-container pt-5'>
+      <div className='position-sticky'>
+        <ul className='nav flex-column'>
+          <li className='nav-item' style={{ fontSize: '25px' }}>
+            <Link className='nav-link text-white' to='/'>
+              <TfiViewList className='me-2' />
+              Backlog
+            </Link>
+          </li>
+          <li className='nav-item' style={{ fontSize: '25px' }}>
+            <Link className='nav-link text-white' to='/board'>
+              <HiOutlineViewBoards className='me-2' />
+              Board
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
   )
 }

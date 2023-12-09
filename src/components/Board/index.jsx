@@ -1,9 +1,20 @@
+import React from 'react'
 import { Tasks } from './Tasks'
+import CarouselTaskMobile from './CarouselTaskMobile'
+import { useMediaQuery } from 'react-responsive'
 import './index.css'
 
-export const Board = () => {
+const Board = () => {
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
+
+  if (isMobile) {
+    return (
+      <CarouselTaskMobile />
+    )
+  }
+
   return (
-    <div className='d-flex justify-content-center'>
+    <div className='col-md-9 d-flex justify-content-center pt-5'>
       <div className='tasks-section text-center mx-3'>
         <h3>TO DO</h3>
         <Tasks state='TO DO' />
@@ -19,3 +30,5 @@ export const Board = () => {
     </div>
   )
 }
+
+export default Board

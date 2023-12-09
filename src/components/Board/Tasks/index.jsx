@@ -12,9 +12,8 @@ export const Tasks = ({ state }) => {
       })
     }
   }, [selectedProject, state])
-  console.log(tasks)
   return (
-    <div>
+    <div className='mt-4'>
       {tasks?.map((task) => {
         return (
           <div key={task._id} className='task-container'>

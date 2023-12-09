@@ -1,6 +1,20 @@
+html, body, #root{
+    background-color: #121212 !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 *{
-    background-color: #121212;
     color: rgb(158, 158, 158);
+    box-sizing: border-box !important;
+}
+
+.app{  
+    background-color: #121212 !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 .pointer{
     cursor: pointer;
