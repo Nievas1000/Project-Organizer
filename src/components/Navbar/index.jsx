@@ -1,4 +1,3 @@
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import { useContext, useState } from 'react'
 import './index.css'
 import { CreateProjectModal } from './CreateProject'
@@ -20,25 +19,31 @@ export const Navbar = () => {
   return (
     <div>
       <div className='navbar-container d-flex pt-3'>
-        <div>
+        <div className='ms-4'>
           <img src={logo} height={80} width={100} />
         </div>
         <div className='d-flex align-items-center'>
           <div className='d-flex ms-5'>
-            <p className='pointer' onClick={() => setShowMenu(!showMenu)}>{selectedProject ? selectedProject.name : 'Projects'} {showMenu ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</p>
-            {showMenu && (
-              <ul className='project-menu'>
-                {projects.map((project) => (
-                  <li key={project._id} onClick={() => selectProject(project)}>{project.name}</li>
-                ))}
-              </ul>
-            )}
+            <select
+              className='pointer'
+              value={selectedProject ? selectedProject._id : ''}
+              onChange={(e) => {
+                const selectedProject = projects.find((project) => project._id === e.target.value)
+                selectProject(selectedProject)
+              }}
+            >
+              {projects?.map((project) => (
+                <option key={project._id} value={project._id}>
+                  {project.name}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className='ms-4 d-none d-md-block'>
+          <div className='d-none d-md-flex align-items-center'>
             <span onClick={() => setCreateProject(!showCreateProject)} className='create pointer'>Create</span>
           </div>
         </div>
-        <div className='position-absolute end-0 me-3 mt-3 d-bloc d-md-none pointer'>
+        <div className='position-absolute end-0 me-3 mt-4 d-block d-md-none pointer'>
           <GiHamburgerMenu size={30} onClick={() => setShowBoardMobile(!showBoardMobile)} />
         </div>
       </div>

@@ -2,37 +2,45 @@
   border-bottom: solid 1px white;
 }
 
-.navbar-container div{
-  margin-left: 10px;
-}
-
-.create{
-  padding: 8px 8px;
-  background-color: #0070cc;
-  border-radius: 8px;
-  color: black;
-}
-.create:hover{
-  background-color: #007ee6;
-}
-
-.project-menu {
-  background-color: #121212;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+.create {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #272525; 
+  border: 2px solid #272525; 
+  border-radius: 5px;
   position: absolute;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  z-index: 1; 
-  top: 70px; 
+  margin-right: 20px;
+  right: 0;
+  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease; 
+
+  &:hover {
+    background-color: rgb(44, 44, 44); 
+    color: #ffffff; 
+    border: 2px solid rgb(44, 44, 44);
+  }
 }
 
-.project-menu li {
-  padding: 10px;
+select {
+  background-color: #121212; 
+  color: #ffffff; 
+  padding: 8px;
+  border-color: #333333;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.project-menu li:hover {
-  background-color: #252525;
+
+select:focus {
+  outline: none;
+  border-color: #333333;
 }
+
+
+select option {
+  background-color: #121212;
+  color: #ffffff;
+}
+

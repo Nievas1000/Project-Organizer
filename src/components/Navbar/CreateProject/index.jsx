@@ -9,7 +9,7 @@ export const CreateProjectModal = ({ setCreateProject }) => {
     <div className='container-create-project'>
       <div className='create-project'>
         <div className='close-modal'>
-          <IoMdClose className='pointer' onClick={() => setCreateProject(false)} />
+          <IoMdClose className='pointer' onClick={() => setCreateProject(false)} size={35} />
         </div>
         <h3>Create project</h3>
         <div className='form-group'>

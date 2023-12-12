@@ -1,19 +1,17 @@
-import { useState } from 'react'
-import { IssueInfo } from './IssueInfo'
 import './index.css'
+import { Link } from 'react-router-dom'
 
 export const Issue = ({ task }) => {
-  const [showModal, setShowModal] = useState(false)
-
   return (
     <div>
-      <li key={task._id} className='task pointer' onClick={() => setShowModal(true)}>
-        <div className='task-title'>{task.name}</div>
-        <div className='task-status'>
-          {task.state}
-        </div>
-      </li>
-      {showModal && <IssueInfo task={task} setShowModal={setShowModal} />}
+      <Link to={`task/${task._id}`}>
+        <li key={task._id} className='task pointer'>
+          <div className='task-title'>{task.name}</div>
+          <div className='task-status'>
+            {task.state}
+          </div>
+        </li>
+      </Link>
     </div>
   )
 }

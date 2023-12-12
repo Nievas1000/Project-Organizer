@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
 import './index.css'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { ProjectContext } from '../../../context/project'
+import { CreateProjectModal } from '../CreateProject'
 
 export const MobileNavigator = () => {
+  const [showCreateProject, setCreateProject] = useState(false)
   const { showBoardMobile, setShowBoardMobile } = useContext(ProjectContext)
+
+  const createIssue = () => {
+    setCreateProject(true)
+  }
   return (
     <div className={`mobile-menu ${showBoardMobile ? 'open' : 'close'}`}>
       <span className='close-btn' onClick={() => setShowBoardMobile(false)}>
@@ -12,6 +18,9 @@ export const MobileNavigator = () => {
       </span>
       <div className='d-flex justify-content-center align-items-center h-100'>
         <ul>
+          <li onClick={createIssue}>
+            Create Project
+          </li>
           <li>
             <Link to='/' onClick={() => setShowBoardMobile(false)}>
               Backlog
@@ -24,6 +33,7 @@ export const MobileNavigator = () => {
           </li>
         </ul>
       </div>
+      {showCreateProject && <CreateProjectModal setCreateProject={setCreateProject} />}
     </div>
   )
 }

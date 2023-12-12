@@ -2,6 +2,7 @@ import { Navigator } from '../Navigator'
 import { Backlog } from '../Backlog'
 import { Route, Routes } from 'react-router-dom'
 import Board from '../Board'
+import IssuePage from '../IssuePage'
 
 export const Home = () => {
   return (
@@ -10,6 +11,7 @@ export const Home = () => {
       <Routes>
         <Route path='/' element={<Backlog />} />
         <Route path='/board' element={<Board />} />
+        <Route path='/task/:id' element={<IssuePage />} />
       </Routes>
     </div>
   )

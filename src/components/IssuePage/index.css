@@ -1,0 +1,9 @@
+input{
+    background-color: transparent !important;
+    color: rgb(165, 165, 165) !important
+}
+
+input::placeholder{
+    color: rgb(165, 165, 165) !important;
+    padding: 5px;
+}

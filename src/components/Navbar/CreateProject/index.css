@@ -8,21 +8,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
   
 .create-project{
+    background-color: #181818;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     position: relative;
-    width: 30%;
+    width: 40%;
 }
 
 .close-modal{
     position: absolute;
     right: 0;
     top: 0;
-    margin-right: 5px;
+    margin-right: 10px;
+    margin-top: 5px;
 }
 
 .form-group {
@@ -34,12 +37,13 @@
     width: 100%;
     border-radius: 4px;
     border: solid 1px gray;
+    background-color: transparent;
 }
 
 .container-create-button {
     display: flex; 
     justify-content: flex-end; 
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 .container-create-button button {
     background-color: #007BFF;
@@ -52,4 +56,17 @@
 
 .container-create-button button:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 1000px){
+    .create-project{
+        width: 60%;
+    }
+}
+
+@media (max-width: 767px){
+    .create-project{
+        width: 100%;
+        height: 100%;
+    }
 }
