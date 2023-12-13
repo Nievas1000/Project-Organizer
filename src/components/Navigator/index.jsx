@@ -9,13 +9,13 @@ export const Navigator = () => {
       <div className='position-sticky'>
         <ul className='nav flex-column'>
           <li className='nav-item' style={{ fontSize: '25px' }}>
-            <Link className='nav-link text-white' to='/'>
+            <Link className='nav-link text-white' to=''>
               <TfiViewList className='me-2' />
               Backlog
             </Link>
           </li>
           <li className='nav-item' style={{ fontSize: '25px' }}>
-            <Link className='nav-link text-white' to='/board'>
+            <Link className='nav-link text-white' to='board'>
               <HiOutlineViewBoards className='me-2' />
               Board
             </Link>

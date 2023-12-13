@@ -27,7 +27,7 @@ export const Tasks = ({ state }) => {
     <div className='mt-4'>
       {tasks?.map((task) => {
         return (
-          <Link key={task._id} to={`/task/${task._id}`}>
+          <Link key={task._id} to={`task/${task._id}`}>
             <div className='task-container pointer' onClick={() => openModal(task)}>
               <p>{task.name}</p>
               <div className='owner'>
