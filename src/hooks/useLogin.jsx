@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 export const useLogin = () => {
   const navigate = useNavigate()
   const [showPasswordInput, setShowPasswordInput] = useState(false)
+  const [passwordExist, setPasswordExist] = useState(true)
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -18,6 +19,7 @@ export const useLogin = () => {
       const response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email })
       const data = response.data
       if (response.status === 200 && data.exist === true) {
+        document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
         navigate('/home')
       }
     },
@@ -33,6 +35,9 @@ export const useLogin = () => {
       if (data.exist === true) {
         setShowPasswordInput(true)
       }
+      if (data.password === false) {
+        setPasswordExist(false)
+      }
     }
   }
 
@@ -41,8 +46,14 @@ export const useLogin = () => {
   }
 
   const handleLogin = async () => {
-    const response = await axios.post('http://localhost:3001/login', user)
+    let response = null
+    if (passwordExist) {
+      response = await axios.post('http://localhost:3001/login', user)
+    } else {
+      response = await axios.put('http://localhost:3001/addPassword', { email: user.email, password: user.password })
+    }
     if (response.status === 200) {
+      document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
       navigate('/home')
     }
   }
@@ -52,9 +63,10 @@ export const useLogin = () => {
     const response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email })
     const data = response.data
     if (response.status === 200 && data.exist === true) {
+      document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
       navigate('/home')
     }
   }
 
-  return { showPasswordInput, handleContinue, handlePasswordChange, handleLogin, handleGoogleLogin, user, setUser }
+  return { showPasswordInput, handleContinue, handlePasswordChange, handleLogin, handleGoogleLogin, user, setUser, passwordExist }
 }

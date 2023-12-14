@@ -17,7 +17,6 @@ export const useSignUp = () => {
     if (user.email !== '') {
       const response = await axios.post('http://localhost:3001/userByEmail', { email: user.email })
       const data = response.data
-      console.log(data)
       if (data.status === 200 && data.exist === true) {
         setShowPasswordInput(false)
         setUserExist('There is already a user with this email!')
@@ -35,6 +34,7 @@ export const useSignUp = () => {
     if (user.email !== '' && user.password !== '') {
       const response = await axios.post('http://localhost:3001/user', user)
       if (response.status === 200) {
+        document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
         navigate('/home')
       }
     }
@@ -44,12 +44,13 @@ export const useSignUp = () => {
     const credentialDecode = jwtDecode(credentialResponse.credential)
     const response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email })
     const data = response.data
-    console.log(credentialDecode)
     if (response.status === 200 && data.exist === true) {
+      document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
       navigate('/home')
     } else {
       const response = await axios.post('http://localhost:3001/user', { email: credentialDecode.email, name: credentialDecode.name, imagen: credentialDecode.imagen })
       if (response.status === 200) {
+        document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
         navigate('/home')
       }
     }

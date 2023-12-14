@@ -1,7 +1,7 @@
 import { useLogin } from '../../../hooks/useLogin'
 
 export const Form = () => {
-  const { showPasswordInput, handleContinue, handlePasswordChange, handleLogin, user, setUser } = useLogin()
+  const { showPasswordInput, handleContinue, handlePasswordChange, handleLogin, user, setUser, passwordExist } = useLogin()
   return (
     <div>
       {showPasswordInput
@@ -9,7 +9,7 @@ export const Form = () => {
           <input
             type='password'
             className='input-login'
-            placeholder='Enter password'
+            placeholder={passwordExist ? 'Enter password' : 'Create a password to your account'}
             value={user.password}
             onChange={handlePasswordChange}
           />
