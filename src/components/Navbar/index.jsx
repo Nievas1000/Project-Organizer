@@ -1,21 +1,12 @@
-import { useContext, useState } from 'react'
 import './index.css'
 import { CreateProjectModal } from './CreateProject'
-import { ProjectContext } from '../../context/project'
 import logo from '../../assets/logo.png'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { MobileNavigator } from './MobileNavigator'
-
+import { useNavbar } from '../../hooks/useNavbar'
+import { UserMenu } from './UserMenu'
 export const Navbar = () => {
-  const [showMenu, setShowMenu] = useState(false)
-  const [showCreateProject, setCreateProject] = useState(false)
-  const { projects, setSelectedProject, selectedProject, showBoardMobile, setShowBoardMobile } = useContext(ProjectContext)
-
-  const selectProject = (project) => {
-    setSelectedProject(project)
-    setShowMenu(!showMenu)
-  }
-
+  const { selectProject, signOut, showCreateProject, setCreateProject, projects, selectedProject, showBoardMobile, setShowBoardMobile, user } = useNavbar()
   return (
     <div>
       <div className='navbar-container d-flex pt-3'>
@@ -23,7 +14,7 @@ export const Navbar = () => {
           <img src={logo} height={80} width={100} />
         </div>
         <div className='d-flex align-items-center'>
-          <div className='d-flex ms-5'>
+          <div className='d-none d-md-flex ms-5'>
             <select
               className='pointer'
               value={selectedProject ? selectedProject._id : ''}
@@ -42,6 +33,7 @@ export const Navbar = () => {
           <div className='d-none d-md-flex align-items-center'>
             <span onClick={() => setCreateProject(!showCreateProject)} className='create pointer'>Create</span>
           </div>
+          <UserMenu user={user} signOut={signOut} />
         </div>
         <div className='position-absolute end-0 me-3 mt-4 d-block d-md-none pointer'>
           <GiHamburgerMenu size={30} onClick={() => setShowBoardMobile(!showBoardMobile)} />

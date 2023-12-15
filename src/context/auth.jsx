@@ -1,17 +1,21 @@
 import { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getFromLocalStorage } from '../utils/localStorage'
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [user, setUser] = useState()
   const navigate = useNavigate()
 
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
         const tokenMatch = document.cookie.match(/token=([^;]*)/)
-        if (tokenMatch && tokenMatch[1]) {
+        const storedUser = getFromLocalStorage('user')
+        if (tokenMatch && tokenMatch[1] && storedUser) {
+          setUser(storedUser)
           const token = tokenMatch[1]
           const response = await fetch('http://localhost:3001/checkLogin', {
             method: 'POST',
@@ -40,6 +44,6 @@ export const AuthProvider = ({ children }) => {
   }, []) //eslint-disable-line
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, user, setUser }}>{children}</AuthContext.Provider>
   )
 }
