@@ -8,10 +8,10 @@ import { saveToLocalStorage } from '../utils/localStorage'
 
 export const useLogin = () => {
   const navigate = useNavigate()
-  const { setIsAuthenticated } = useAuth()
+  const { setIsAuthenticated, setUser } = useAuth()
   const [showPasswordInput, setShowPasswordInput] = useState(false)
   const [passwordExist, setPasswordExist] = useState(true)
-  const [user, setUser] = useState({
+  const [user, setUserData] = useState({
     email: '',
     password: ''
   })
@@ -48,7 +48,7 @@ export const useLogin = () => {
   }
 
   const handlePasswordChange = (e) => {
-    setUser({ ...user, password: e.target.value })
+    setUserData({ ...user, password: e.target.value })
   }
 
   const handleLogin = async () => {
@@ -59,7 +59,6 @@ export const useLogin = () => {
       response = await axios.put('http://localhost:3001/addPassword', { email: user.email, password: user.password })
     }
     if (response.status === 200) {
-      console.log(response.data)
       document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
       saveToLocalStorage('user', response.data.user)
       setUser(response.data.user)

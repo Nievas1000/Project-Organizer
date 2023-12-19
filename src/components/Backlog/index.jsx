@@ -21,7 +21,7 @@ export const Backlog = () => {
           <div className='task-list-container'>
             <ul className='task-list'>
               {tasks.map((task) => (
-                <Issue key={task._id} task={task} />
+                <Issue key={task.name} task={task} />
               ))}
             </ul>
           </div>

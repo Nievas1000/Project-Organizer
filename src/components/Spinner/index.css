@@ -1,0 +1,21 @@
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* O ajusta la altura según tus necesidades */
+  }
+  
+  .spinner {
+    font-size: 3rem;
+    color: white; /* Cambia el color a blanco */
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

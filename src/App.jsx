@@ -7,6 +7,7 @@ import { Login } from './components/Login'
 import { SignUp } from './components/SignUp'
 import { PrivateRoute } from './components/PrivateRoute'
 import { PublicRoute } from './components/PublicRoute'
+import { ProjectParticipants } from './components/ProjectParticipants'
 
 function App () {
   return (
@@ -23,6 +24,7 @@ function App () {
             <Route path='board' element={<Board />} />
             <Route path='board/task/:id' element={<IssuePage />} />
             <Route path='task/:id' element={<IssuePage />} />
+            <Route path='people' element={<ProjectParticipants />} />
           </Route>
         </Route>
       </Routes>

@@ -27,8 +27,13 @@ export const MobileNavigator = () => {
             </Link>
           </li>
           <li>
-            <Link to='/board' onClick={() => setShowBoardMobile(false)}>
+            <Link to='board' onClick={() => setShowBoardMobile(false)}>
               Board
+            </Link>
+          </li>
+          <li>
+            <Link to='people' onClick={() => setShowBoardMobile(false)}>
+              People
             </Link>
           </li>
         </ul>

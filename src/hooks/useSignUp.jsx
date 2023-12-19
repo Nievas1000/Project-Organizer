@@ -6,11 +6,11 @@ import { useAuth } from './useAuth'
 import { saveToLocalStorage } from '../utils/localStorage'
 
 export const useSignUp = () => {
-  const { setIsAuthenticated } = useAuth()
+  const { setIsAuthenticated, setUser } = useAuth()
   const [showPasswordInput, setShowPasswordInput] = useState(false)
   const [userExist, setUserExist] = useState()
   const navigate = useNavigate()
-  const [user, setUser] = useState({
+  const [user, setUserData] = useState({
     email: '',
     name: '',
     password: ''
@@ -30,7 +30,7 @@ export const useSignUp = () => {
   }
 
   const handlePasswordChange = (e) => {
-    setUser({ ...user, password: e.target.value })
+    setUserData({ ...user, password: e.target.value })
   }
 
   const handleCreateUser = async () => {
@@ -48,14 +48,16 @@ export const useSignUp = () => {
 
   const handleGoogleSignup = async (credentialResponse) => {
     const credentialDecode = jwtDecode(credentialResponse.credential)
-    const response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email, isExternal: true })
+    let response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email, isExternal: true })
     const data = response.data
-    if (response.status === 200 && data.exist === true) {
+    if (data.exist === true) {
       document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
+      setIsAuthenticated(true)
       saveToLocalStorage('user', response.data.user)
+      setUser(response.data.user)
       navigate('/home')
     } else {
-      const response = await axios.post('http://localhost:3001/user', { email: credentialDecode.email, name: credentialDecode.name, imagen: credentialDecode.imagen })
+      response = await axios.post('http://localhost:3001/user', { email: credentialDecode.email, name: credentialDecode.name, imagen: credentialDecode.imagen })
       if (response.status === 200) {
         document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
         setIsAuthenticated(true)

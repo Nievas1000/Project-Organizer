@@ -14,22 +14,23 @@ export const Navbar = () => {
           <img src={logo} height={80} width={100} />
         </div>
         <div className='d-flex align-items-center'>
-          <div className='d-none d-md-flex ms-5'>
-            <select
-              className='pointer'
-              value={selectedProject ? selectedProject._id : ''}
-              onChange={(e) => {
-                const selectedProject = projects.find((project) => project._id === e.target.value)
-                selectProject(selectedProject)
-              }}
-            >
-              {projects?.map((project) => (
-                <option key={project._id} value={project._id}>
-                  {project.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          {projects && projects.length > 0 &&
+            <div className='d-none d-md-flex ms-5'>
+              <select
+                className='pointer'
+                value={selectedProject ? selectedProject._id : ''}
+                onChange={(e) => {
+                  const selectedProject = projects.find((project) => project._id === e.target.value)
+                  selectProject(selectedProject)
+                }}
+              >
+                {projects?.map((project) => (
+                  <option key={project._id} value={project._id}>
+                    {project.name}
+                  </option>
+                ))}
+              </select>
+            </div>}
           <div className='d-none d-md-flex align-items-center'>
             <span onClick={() => setCreateProject(!showCreateProject)} className='create pointer'>Create</span>
           </div>
