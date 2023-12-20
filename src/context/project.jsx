@@ -61,7 +61,8 @@ export const ProjectProvider = ({ children }) => {
     setProjects,
     setTasks,
     setSelectedProject,
-    setShowBoardMobile
+    setShowBoardMobile,
+    setParticipants
   }
 
   return (

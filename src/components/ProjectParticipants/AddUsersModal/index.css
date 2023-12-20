@@ -1,0 +1,73 @@
+.container-add-users{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+  
+.add-users{
+    background-color: #181818;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 30%;
+}
+
+.participant-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+  
+.participant-info {
+    flex-grow: 1;
+    margin: 0;
+}
+  
+.participant-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+  
+.participant-email {
+    margin-bottom: 0;
+    font-size: 13px;
+}
+  
+.participant-actions button {
+    background-color: #343a40;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.participant-actions button:hover {
+    background-color: #23282c;
+}
+
+@media (max-width: 1000px){
+    .add-users{
+        width: 60%;
+    }
+}
+
+@media (max-width: 767px){
+    .add-users{
+        width: 100%;
+        height: 100%;
+    }
+}
