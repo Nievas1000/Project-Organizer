@@ -67,5 +67,6 @@
 @media (max-width: 767px){
     .create-task{
         width: 100%;
+        height: 100%;
     }
 }

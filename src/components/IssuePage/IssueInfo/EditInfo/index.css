@@ -1,0 +1,20 @@
+.form-edit{
+    width: 50%;
+    color: white !important;
+    border: solid 1px #343a40;
+    border-radius: 8px;
+}
+
+.title{
+    font-size: 40px;
+}
+
+.description{
+    font-size: 16px;
+}
+
+@media (max-width: 767px){
+    .form-edit{
+        width: 100%;
+    }
+}

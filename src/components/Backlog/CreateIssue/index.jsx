@@ -5,7 +5,7 @@ import axios from 'axios'
 import { ProjectContext } from '../../../context/project'
 
 export const CreateIssueModal = ({ setCreateIssue }) => {
-  const { selectedProject, setTasks, tasks } = useContext(ProjectContext)
+  const { selectedProject, setTasks, tasks, participants } = useContext(ProjectContext)
   const [issue, setIssue] = useState({
     name: '',
     description: '',
@@ -50,9 +50,11 @@ export const CreateIssueModal = ({ setCreateIssue }) => {
           <h6>Owner:</h6>
           <select name='owner' value={issue.owner} onChange={handleChange}>
             <option value=''>Select owner</option>
-            <option value='Lautaro'>Lautaro</option>
-            <option value='Jerry'>Jerry</option>
-            <option value='Sophia'>Sophia</option>
+            {participants.map((participant) => (
+              <option key={participant._id} value={participant._id}>
+                {participant.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className='container-create-button'>
