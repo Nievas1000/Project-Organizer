@@ -9,7 +9,6 @@ export const usePeople = (setShowModal) => {
   const addPeople = async (participant) => {
     try {
       const response = await axios.post('http://localhost:3001/addProject', { email: participant.email, projectId: selectedProject._id })
-      console.log(response)
       if (response.status === 200) {
         setParticipants((prevParticipants) => [...prevParticipants, participant])
         setShowModal(false)

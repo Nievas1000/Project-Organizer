@@ -7,3 +7,20 @@ input::placeholder{
     color: rgb(165, 165, 165) !important;
     padding: 5px;
 }
+
+.status{
+    border: none;
+    background-color: #343a40 ;
+    width: 60%;
+}
+
+.status option{
+    background-color: #343a40 ;
+    border: none;
+}
+
+@media (max-width: 767px){
+    .status{
+        margin-top: 30px;
+    }
+}

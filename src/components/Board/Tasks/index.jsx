@@ -31,7 +31,7 @@ export const Tasks = ({ state }) => {
             <div className='task-container pointer' onClick={() => openModal(task)}>
               <p>{task.name}</p>
               <div className='owner'>
-                <p>{task.owner}</p>
+                <p>{task.owner.name}</p>
               </div>
             </div>
           </Link>

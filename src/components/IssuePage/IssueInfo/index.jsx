@@ -1,7 +1,7 @@
-import { MdModeEdit } from 'react-icons/md'
 import { EditInfo } from './EditInfo'
 import { useEditInfo } from '../../../hooks/useEditInfo'
 import './index.css'
+import { CurrentInfo } from './CurrentInfo'
 
 export const IssueInfo = ({ task }) => {
   const { selectedProject, isEditMode, handleEditClick, comment, setComment, editedDescription, editedTitle, handleCancelClick, setEditedDescription, setEditedTitle } = useEditInfo()
@@ -18,17 +18,7 @@ export const IssueInfo = ({ task }) => {
             />
             )
           : (
-            <>
-              <h1 className='text-white mt-4'>{task?.name}</h1>
-              <div className='d-flex pointer' onClick={() => handleEditClick(task)}>
-                <div className='d-inline-flex pointer set-edit'>
-                  <MdModeEdit className='mt-1' size={20} />
-                  <span className='ms-1'>Edit</span>
-                </div>
-              </div>
-              <h5 className='text-white mt-5'>Description</h5>
-              <p>{task?.description}</p>
-            </>
+            <CurrentInfo handleEditClick={handleEditClick} task={task} />
             )}
       </div>
       <h5 className='text-white mt-5'>Activity</h5>

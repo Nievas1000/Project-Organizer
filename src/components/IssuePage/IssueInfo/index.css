@@ -1,6 +1,25 @@
-.set-edit{
-    background-color: #343a40 !important;
+.action-button{
     border-radius: 8px;
     padding: 5px;
     align-items: center;
+}
+
+.action-button span{
+    font-size: 12px;
+}
+
+.delete-action{
+    background-color: #8b0000 !important;
+}
+
+.edit-action{
+    background-color: #343a40 !important;
+}
+
+.delete-action:hover{
+    background-color: #a50000 !important;
+}
+
+.edit-action:hover{
+    background-color: #4d565f !important;
 }

@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
 import { ProjectContext } from '../../context/project'
-import { FaUserTie } from 'react-icons/fa'
 import './index.css'
 import { AddUsersModal } from './AddUsersModal'
+import { Participant } from './Participant'
 
 export const ProjectParticipants = () => {
   const [showModal, setShowModal] = useState()
@@ -16,13 +16,7 @@ export const ProjectParticipants = () => {
           ? (
             <div className='participant-list mt-5'>
               {participants.map((participant, index) => (
-                <div className='participant-item mt-4' key={index}>
-                  <FaUserTie className='participant-icon' />
-                  <div>
-                    <p className='participant-name'>{participant.name}</p>
-                    <p className='participant-email'>{participant.email}</p>
-                  </div>
-                </div>
+                <Participant key={index} participant={participant} />
               ))}
             </div>
             )

@@ -5,7 +5,7 @@ import axios from 'axios'
 import { ProjectContext } from '../../../context/project'
 
 export const CreateIssueModal = ({ setCreateIssue }) => {
-  const { selectedProject, setTasks, tasks, participants } = useContext(ProjectContext)
+  const { selectedProject, setTasks, participants } = useContext(ProjectContext)
   const [issue, setIssue] = useState({
     name: '',
     description: '',
@@ -24,7 +24,7 @@ export const CreateIssueModal = ({ setCreateIssue }) => {
       const response = await axios.post('http://localhost:3001/task', issue)
       if (response.status === 200) {
         setCreateIssue(false)
-        setTasks([...tasks, issue])
+        setTasks(response.data.tasks)
       }
     } catch (error) {
       console.log(error)
