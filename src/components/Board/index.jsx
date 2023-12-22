@@ -24,8 +24,8 @@ const Board = () => {
         <Tasks state='IN PROGRESS' />
       </div>
       <div className='tasks-section text-center mx-3'>
-        <h3>COMPLETED</h3>
-        <Tasks state='COMPLETED' />
+        <h3>DONE</h3>
+        <Tasks state='DONE' />
       </div>
     </div>
   )

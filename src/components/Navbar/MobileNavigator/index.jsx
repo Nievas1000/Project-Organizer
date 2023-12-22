@@ -6,7 +6,7 @@ import { CreateProjectModal } from '../CreateProject'
 
 export const MobileNavigator = () => {
   const [showCreateProject, setCreateProject] = useState(false)
-  const { showBoardMobile, setShowBoardMobile } = useContext(ProjectContext)
+  const { showBoardMobile, setShowBoardMobile, projects } = useContext(ProjectContext)
 
   const createIssue = () => {
     setCreateProject(true)
@@ -31,11 +31,12 @@ export const MobileNavigator = () => {
               Board
             </Link>
           </li>
-          <li>
-            <Link to='people' onClick={() => setShowBoardMobile(false)}>
-              People
-            </Link>
-          </li>
+          {projects && projects.length > 0 &&
+            <li>
+              <Link to='people' onClick={() => setShowBoardMobile(false)}>
+                People
+              </Link>
+            </li>}
         </ul>
       </div>
       {showCreateProject && <CreateProjectModal setCreateProject={setCreateProject} />}

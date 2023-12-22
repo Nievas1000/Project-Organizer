@@ -1,7 +1,7 @@
 import { useLogin } from '../../../hooks/useLogin'
 
 export const Form = () => {
-  const { showPasswordInput, handleContinue, handlePasswordChange, handleLogin, user, setUser, passwordExist } = useLogin()
+  const { showPasswordInput, handleContinue, handlePasswordChange, handleLogin, user, setUserData, passwordExist, error } = useLogin()
   return (
     <div>
       {showPasswordInput
@@ -20,9 +20,10 @@ export const Form = () => {
             className='input-login'
             placeholder='Enter email'
             value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            onChange={(e) => setUserData({ ...user, email: e.target.value })}
           />
           )}
+      {error && <span className='error-message'>{error}</span>}
       <button className='btn btn-dark w-100 mt-4' onClick={showPasswordInput ? handleLogin : handleContinue}>
         {showPasswordInput ? 'Login' : 'Continue'}
       </button>

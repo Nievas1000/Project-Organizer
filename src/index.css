@@ -24,3 +24,7 @@ a{
     color: inherit !important;
     text-decoration: none !important;
 }
+
+.error-message{
+    color: #8b0000;
+}

@@ -8,7 +8,7 @@ import { saveToLocalStorage } from '../utils/localStorage'
 export const useSignUp = () => {
   const { setIsAuthenticated, setUser } = useAuth()
   const [showPasswordInput, setShowPasswordInput] = useState(false)
-  const [userExist, setUserExist] = useState()
+  const [error, setError] = useState()
   const navigate = useNavigate()
   const [user, setUserData] = useState({
     email: '',
@@ -20,10 +20,11 @@ export const useSignUp = () => {
     if (user.email !== '') {
       const response = await axios.post('http://localhost:3001/userByEmail', { email: user.email })
       const data = response.data
-      if (data.status === 200 && data.exist === true) {
+      if (data.exist === true) {
         setShowPasswordInput(false)
-        setUserExist('There is already a user with this email!')
+        setError('There is already a user with this email!')
       } else {
+        setError(null)
         setShowPasswordInput(true)
       }
     }
@@ -34,7 +35,8 @@ export const useSignUp = () => {
   }
 
   const handleCreateUser = async () => {
-    if (user.email !== '' && user.password !== '') {
+    console.log(user)
+    if (user.name !== '' && user.password !== '') {
       const response = await axios.post('http://localhost:3001/user', user)
       if (response.status === 200) {
         document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
@@ -43,6 +45,8 @@ export const useSignUp = () => {
         setUser(response.data.user)
         navigate('/home')
       }
+    } else {
+      setError('The name or password value is invalid!')
     }
   }
 
@@ -68,5 +72,5 @@ export const useSignUp = () => {
     }
   }
 
-  return { showPasswordInput, user, setUser, handleContinue, handlePasswordChange, handleCreateUser, userExist, handleGoogleSignup }
+  return { showPasswordInput, user, setUserData, handleContinue, handlePasswordChange, handleCreateUser, error, handleGoogleSignup }
 }

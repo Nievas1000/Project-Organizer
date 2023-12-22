@@ -11,6 +11,7 @@ export const useLogin = () => {
   const { setIsAuthenticated, setUser } = useAuth()
   const [showPasswordInput, setShowPasswordInput] = useState(false)
   const [passwordExist, setPasswordExist] = useState(true)
+  const [error, setError] = useState()
   const [user, setUserData] = useState({
     email: '',
     password: ''
@@ -35,15 +36,20 @@ export const useLogin = () => {
   })
 
   const handleContinue = async () => {
-    if (user.email !== '') {
+    if (user.email !== '' && user.email.length > 12) {
+      setError(null)
       const response = await axios.post('http://localhost:3001/userByEmail', { email: user.email })
       const data = response.data
       if (data.exist === true) {
         setShowPasswordInput(true)
+      } else {
+        setError('Doesn`t exist an user with this email!')
       }
       if (data.password === false) {
         setPasswordExist(false)
       }
+    } else {
+      setError('Enter a valid Email!')
     }
   }
 
@@ -52,18 +58,23 @@ export const useLogin = () => {
   }
 
   const handleLogin = async () => {
-    let response = null
-    if (passwordExist) {
-      response = await axios.post('http://localhost:3001/login', user)
+    if (user.password !== '' && user.password.length > 5) {
+      let response = null
+      if (passwordExist) {
+        response = await axios.post('http://localhost:3001/login', user)
+      } else {
+        response = await axios.put('http://localhost:3001/addPassword', { email: user.email, password: user.password })
+      }
+      if (response.status === 200) {
+        document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
+        saveToLocalStorage('user', response.data.user)
+        setUser(response.data.user)
+        setIsAuthenticated(true)
+        navigate('/home')
+        setError(null)
+      }
     } else {
-      response = await axios.put('http://localhost:3001/addPassword', { email: user.email, password: user.password })
-    }
-    if (response.status === 200) {
-      document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
-      saveToLocalStorage('user', response.data.user)
-      setUser(response.data.user)
-      setIsAuthenticated(true)
-      navigate('/home')
+      setError('Enter a password of more than 5 characters!')
     }
   }
 
@@ -80,5 +91,5 @@ export const useLogin = () => {
     }
   }
 
-  return { showPasswordInput, handleContinue, handlePasswordChange, handleLogin, handleGoogleLogin, user, setUser, passwordExist }
+  return { showPasswordInput, handleContinue, handlePasswordChange, handleLogin, handleGoogleLogin, user, setUserData, passwordExist, error }
 }
