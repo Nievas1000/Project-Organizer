@@ -4,7 +4,7 @@ import { getCurrentDate } from '../utils/currentDate'
 import { useAuth } from './useAuth'
 import { ProjectContext } from '../context/project'
 
-export const useProject = () => {
+export const useProject = (setCreateProject) => {
   const { user } = useAuth()
   const { setProjects } = useContext(ProjectContext)
   const [error, setError] = useState({
@@ -38,14 +38,15 @@ export const useProject = () => {
       }
     }))
   }
-
   const createProject = async () => {
     if (projectData.name !== '' && projectData.description !== '' && projectData.endDate !== '') {
       try {
         setProjects(projectData)
         projectData.userId = user.id
         const response = await axios.post('http://localhost:3001/project', projectData)
-        console.log(response)
+        if (response.status === 200) {
+          setCreateProject(false)
+        }
       } catch (error) {
         console.log(error)
       }

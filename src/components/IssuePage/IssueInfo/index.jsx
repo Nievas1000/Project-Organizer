@@ -4,7 +4,7 @@ import './index.css'
 import { CurrentInfo } from './CurrentInfo'
 import { CommentZone } from './CommentZone'
 
-export const IssueInfo = ({ task }) => {
+export const IssueInfo = ({ task, setTask }) => {
   const { selectedProject, isEditMode, handleEditClick, editedDescription, editedTitle, handleCancelClick, setEditedDescription, setEditedTitle } = useEditInfo()
   return (
     <div className='ms-3'>
@@ -22,7 +22,7 @@ export const IssueInfo = ({ task }) => {
             <CurrentInfo handleEditClick={handleEditClick} task={task} />
             )}
       </div>
-      <CommentZone task={task} />
+      <CommentZone task={task} setTask={setTask} />
     </div>
   )
 }

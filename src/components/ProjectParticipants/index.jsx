@@ -7,7 +7,7 @@ import { useAuth } from '../../hooks/useAuth'
 
 export const ProjectParticipants = () => {
   const [showModal, setShowModal] = useState()
-  const { participants } = useContext(ProjectContext)
+  const { participants, selectedProject } = useContext(ProjectContext)
   const { user } = useAuth()
 
   return (
@@ -20,7 +20,7 @@ export const ProjectParticipants = () => {
               {participants
                 .filter(participant => user.id !== participant._id)
                 .map((participant, index) => (
-                  <Participant key={index} participant={participant} />
+                  <Participant key={index} participant={participant} isAdmin={selectedProject.admins.includes(user.email)} selectedProject={selectedProject} />
                 ))}
             </div>
             )
@@ -28,9 +28,10 @@ export const ProjectParticipants = () => {
             <p>No participants available.</p>
             )}
       </div>
-      <div className='position-absolute end-0 top-0 mt-5 me-5'>
-        <button className='btn btn-dark' onClick={() => setShowModal(true)}>Add People</button>
-      </div>
+      {selectedProject?.admins.includes(user.email) &&
+        <div className='position-absolute end-0 top-0 mt-5 me-5'>
+          <button className='btn btn-dark' onClick={() => setShowModal(true)}>Add People</button>
+        </div>}
       {showModal && <AddUsersModal setShowModal={setShowModal} />}
     </div>
   )

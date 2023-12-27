@@ -19,4 +19,21 @@
   
 .comment-content {
     margin: 0;
+    color: rgb(226, 226, 226);
+}
+
+.modify-comment-zone{
+    font-size: 13px;
+}
+
+.modify-comment-zone span:hover{
+    text-decoration: underline;
+}
+
+.form-edit-comment{
+    width: 70%;
+    padding: 4px;
+    color: white !important;
+    border: solid 1px #343a40;
+    border-radius: 4px;
 }

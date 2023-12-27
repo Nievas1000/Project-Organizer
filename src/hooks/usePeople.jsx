@@ -19,7 +19,7 @@ export const usePeople = (setShowModal) => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3001/usersNoProject/${selectedProject._id}`).then(response => response.json()).then(data => {
+    fetch(`http://localhost:3001/usersNoProject/${selectedProject._id}`, { method: 'POST' }).then(response => response.json()).then(data => {
       if (data.length > 0) {
         setPeople(data)
       }

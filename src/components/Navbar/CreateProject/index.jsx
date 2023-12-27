@@ -3,7 +3,7 @@ import './index.css'
 import { useProject } from '../../../hooks/useProject'
 
 export const CreateProjectModal = ({ setCreateProject }) => {
-  const { handleChange, projectData, createProject, error } = useProject()
+  const { handleChange, projectData, createProject, error } = useProject(setCreateProject)
   return (
     <div className='container-create-project'>
       <div className='create-project'>

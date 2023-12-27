@@ -1,16 +1,12 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
 import './index.css'
 import { IssueInfo } from './IssueInfo'
-import { ProjectContext } from '../../context/project'
-import axios from 'axios'
+import { useEditInfo } from '../../hooks/useEditInfo'
 
 const IssuePage = () => {
-  const [task, setTask] = useState()
-  const [owner, setOwner] = useState()
-  const [state, setState] = useState()
-  const { participants, tasks, setTasks } = useContext(ProjectContext)
+  const { setTask, task, state, owner, setState, setOwner, participants, updateOwner, updateStatus } = useEditInfo()
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -22,42 +18,11 @@ const IssuePage = () => {
     }
   }, [id])
 
-  const updateOwner = async () => {
-    try {
-      const response = await axios.put(`http://localhost:3001/updateOwner/${task._id}`, { email: owner })
-      if (response.status === 200) {
-        task.owner.email = owner
-        task.owner.name = response.data.owner
-        const taskIndex = tasks.findIndex((taskCurrent) => taskCurrent._id === task._id)
-        const updatedTasks = [...tasks]
-        updatedTasks[taskIndex].owner.email = owner
-        updatedTasks[taskIndex].owner.name = response.data.owner
-        setTasks(updatedTasks)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const updateStatus = async () => {
-    try {
-      const response = await axios.put(`http://localhost:3001/updateStatus/${task._id}`, { state })
-      if (response.status === 200) {
-        task.state = response.data.task.state
-        const taskIndex = tasks.findIndex((taskCurrent) => taskCurrent._id === task._id)
-        const updatedTasks = [...tasks]
-        updatedTasks[taskIndex].state = response.data.task.state
-        setTasks(updatedTasks)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
   return (
     <div className='col-md-9 ms-2 pt-5 d-flex row'>
       <div className='col-md-9'>
         <FaArrowLeft className='pointer' size={25} onClick={() => navigate(-1)} />
-        <IssueInfo task={task} />
+        <IssueInfo task={task} setTask={setTask} />
       </div>
       <div className='col-md-3'>
         <select name='status' value={!state ? task?.state : state} className='status' onChange={(e) => setState(e.target.value)}>
