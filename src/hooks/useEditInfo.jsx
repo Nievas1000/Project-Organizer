@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react'
 import { ProjectContext } from '../context/project'
+import axios from 'axios'
+import { useAuth } from './useAuth'
 
 export const useEditInfo = () => {
   const [comment, setComment] = useState('')
@@ -7,6 +9,24 @@ export const useEditInfo = () => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [editedTitle, setEditedTitle] = useState()
   const [editedDescription, setEditedDescription] = useState()
+  const { user } = useAuth()
+
+  const addComment = async (task) => {
+    if (comment !== '') {
+      try {
+        const response = await axios.post(`http://localhost:3001/addComment/${task._id}`, { name: user.name, email: user.email, comment })
+        console.log(response)
+        if (response.status === 200) {
+          task.comments.push({
+            name: user.name, email: user.email, comment, date: new Date()
+          })
+          setComment('')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 
   const handleEditClick = (task) => {
     setIsEditMode(true)
@@ -36,6 +56,7 @@ export const useEditInfo = () => {
     setEditedDescription,
     handleEditClick,
     handleSaveClick,
-    handleCancelClick
+    handleCancelClick,
+    addComment
   }
 }

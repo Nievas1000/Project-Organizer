@@ -37,16 +37,21 @@ export const useLogin = () => {
 
   const handleContinue = async () => {
     if (user.email !== '' && user.email.length > 12) {
-      setError(null)
-      const response = await axios.post('http://localhost:3001/userByEmail', { email: user.email })
-      const data = response.data
-      if (data.exist === true) {
-        setShowPasswordInput(true)
-      } else {
-        setError('Doesn`t exist an user with this email!')
-      }
-      if (data.password === false) {
-        setPasswordExist(false)
+      try {
+        setError(null)
+        const response = await axios.post('http://localhost:3001/userByEmail', { email: user.email })
+        const data = response.data
+        if (data.exist === true) {
+          setShowPasswordInput(true)
+        } else {
+          setError('Doesn`t exist an user with this email!')
+        }
+        if (data.password === false) {
+          setPasswordExist(false)
+        }
+      } catch (error) {
+        console.log(error)
+        setError(error.response.data.error)
       }
     } else {
       setError('Enter a valid Email!')
@@ -59,19 +64,24 @@ export const useLogin = () => {
 
   const handleLogin = async () => {
     if (user.password !== '' && user.password.length > 5) {
-      let response = null
-      if (passwordExist) {
-        response = await axios.post('http://localhost:3001/login', user)
-      } else {
-        response = await axios.put('http://localhost:3001/addPassword', { email: user.email, password: user.password })
-      }
-      if (response.status === 200) {
-        document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
-        saveToLocalStorage('user', response.data.user)
-        setUser(response.data.user)
-        setIsAuthenticated(true)
-        navigate('/home')
-        setError(null)
+      try {
+        let response = null
+        if (passwordExist) {
+          response = await axios.post('http://localhost:3001/login', user)
+        } else {
+          response = await axios.put('http://localhost:3001/addPassword', { email: user.email, password: user.password })
+        }
+        if (response.status === 200) {
+          document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
+          saveToLocalStorage('user', response.data.user)
+          setUser(response.data.user)
+          setIsAuthenticated(true)
+          navigate('/home')
+          setError(null)
+        }
+      } catch (error) {
+        console.log(error)
+        setError(error.response.data.error)
       }
     } else {
       setError('Enter a password of more than 5 characters!')
@@ -79,17 +89,21 @@ export const useLogin = () => {
   }
 
   const handleGoogleLogin = async (credentialResponse) => {
-    const credentialDecode = jwtDecode(credentialResponse.credential)
-    const response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email, isExternal: true })
-    const data = response.data
-    if (response.status === 200 && data.exist === true) {
-      document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
-      saveToLocalStorage('user', response.data.user)
-      setUser(response.data.user)
-      setIsAuthenticated(true)
-      navigate('/home')
+    try {
+      const credentialDecode = jwtDecode(credentialResponse.credential)
+      const response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email, isExternal: true })
+      const data = response.data
+      if (response.status === 200 && data.exist === true) {
+        document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
+        saveToLocalStorage('user', response.data.user)
+        setUser(response.data.user)
+        setIsAuthenticated(true)
+        navigate('/home')
+      }
+    } catch (error) {
+      console.log(error.response.data.error)
+      setError(error.response.data.error)
     }
   }
-
   return { showPasswordInput, handleContinue, handlePasswordChange, handleLogin, handleGoogleLogin, user, setUserData, passwordExist, error }
 }

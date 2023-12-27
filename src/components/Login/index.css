@@ -9,11 +9,12 @@
 
 .input-login{
     background-color: transparent;
-    color: '#fff';  
-    padding: '10px';
-    border: '1px solid #ccc';
-    border-radius: '5px';
-    outline: 'none';
+    color: #fff;  
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
 }
 
 .create-account{

@@ -3,10 +3,12 @@ import { ProjectContext } from '../../context/project'
 import './index.css'
 import { AddUsersModal } from './AddUsersModal'
 import { Participant } from './Participant'
+import { useAuth } from '../../hooks/useAuth'
 
 export const ProjectParticipants = () => {
   const [showModal, setShowModal] = useState()
   const { participants } = useContext(ProjectContext)
+  const { user } = useAuth()
 
   return (
     <div className='col-md-9 pt-5 position-absolute end-0 d-flex'>
@@ -15,9 +17,11 @@ export const ProjectParticipants = () => {
         {participants && participants.length > 0
           ? (
             <div className='participant-list mt-5'>
-              {participants.map((participant, index) => (
-                <Participant key={index} participant={participant} />
-              ))}
+              {participants
+                .filter(participant => user.id !== participant._id)
+                .map((participant, index) => (
+                  <Participant key={index} participant={participant} />
+                ))}
             </div>
             )
           : (

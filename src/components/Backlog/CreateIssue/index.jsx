@@ -13,21 +13,53 @@ export const CreateIssueModal = ({ setCreateIssue }) => {
     projectId: selectedProject ? selectedProject._id : null,
     owner: ''
   })
+  const [error, setError] = useState({
+    exist: false,
+    fields: {
+      name: '',
+      description: '',
+      owner: ''
+    }
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setIssue({ ...issue, [name]: value })
+    updateErrorFields([name], '')
+  }
+
+  const updateErrorFields = (field, value) => {
+    setError(prevError => ({
+      ...prevError,
+      fields: {
+        ...prevError.fields,
+        [field]: value
+      }
+    }))
   }
 
   const createIssue = async () => {
-    try {
-      const response = await axios.post('http://localhost:3001/task', issue)
-      if (response.status === 200) {
-        setCreateIssue(false)
-        setTasks(response.data.tasks)
+    if (issue.name !== '' && issue.description !== '' && issue.owner !== '') {
+      try {
+        const response = await axios.post('http://localhost:3001/task', issue)
+        if (response.status === 200) {
+          setCreateIssue(false)
+          setTasks(response.data.tasks)
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
+    } else {
+      error.exist = true
+      if (issue.name === '') {
+        updateErrorFields('name', 'You must enter a name!')
+      }
+      if (issue.description === '') {
+        updateErrorFields('description', 'You must enter a description!')
+      }
+      if (!issue.endDate) {
+        updateErrorFields('owner', 'You must enter an owner!')
+      }
     }
   }
 
@@ -41,10 +73,12 @@ export const CreateIssueModal = ({ setCreateIssue }) => {
         <div className='form-group'>
           <h6>Name:</h6>
           <input type='text' name='name' value={issue.name} onChange={handleChange} />
+          {error.exist && error.fields.name !== '' && <span className='error-message'>{error.fields.name}</span>}
         </div>
         <div className='form-group'>
           <h6>Description:</h6>
           <input type='text' name='description' value={issue.description} onChange={handleChange} />
+          {error.exist && error.fields.description !== '' && <span className='error-message'>{error.fields.description}</span>}
         </div>
         <div className='form-group'>
           <h6>Owner:</h6>
@@ -56,9 +90,10 @@ export const CreateIssueModal = ({ setCreateIssue }) => {
               </option>
             ))}
           </select>
+          {error.exist && error.fields.owner !== '' && <span className='error-message d-flex'>{error.fields.owner}</span>}
         </div>
         <div className='container-create-button'>
-          <button onClick={createIssue}>Create</button>
+          <button className='btn btn-dark' onClick={createIssue}>Create</button>
         </div>
       </div>
     </div>

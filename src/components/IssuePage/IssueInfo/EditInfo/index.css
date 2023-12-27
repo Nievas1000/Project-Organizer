@@ -11,6 +11,7 @@
 
 .description{
     font-size: 16px;
+    background-color: transparent;
 }
 
 @media (max-width: 767px){

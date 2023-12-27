@@ -1,43 +1,20 @@
-import { useContext, useEffect, useState } from 'react'
-import { ProjectContext } from '../../../context/project'
 import './index.css'
-import { IssueInfo } from '../../Backlog/Issue/IssueInfo'
-import { Link } from 'react-router-dom'
+import { Task } from '../Task'
+import { useBoard } from '../../../hooks/useBoard'
 
 export const Tasks = ({ state }) => {
-  const [tasks, setTasks] = useState()
-  const [task, setTask] = useState()
-  const [showModal, setShowModal] = useState(false)
-  const { selectedProject } = useContext(ProjectContext)
-
-  const openModal = (task) => {
-    setTask(task)
-    setShowModal(true)
-  }
-
-  useEffect(() => {
-    if (selectedProject) {
-      fetch(`http://localhost:3001/taskByStatus/${selectedProject._id}/${state}`).then(response => response.json()).then(data => {
-        setTasks(data.tasks)
-      })
-    }
-  }, [selectedProject, state])
+  const { onDragEnterHandler, onDragOverHandler, onDropHandler, onDragLeaveHandler, tasks } = useBoard(state)
 
   return (
-    <div className='mt-4'>
-      {tasks?.map((task) => {
-        return (
-          <Link key={task._id} to={`task/${task._id}`}>
-            <div className='task-container pointer' onClick={() => openModal(task)}>
-              <p>{task.name}</p>
-              <div className='owner'>
-                <p>{task.owner.name}</p>
-              </div>
-            </div>
-          </Link>
-        )
-      })}
-      {showModal && <IssueInfo task={task} setShowModal={setShowModal} />}
+    <div className='tasks-section text-center mx-3' onDragLeave={onDragLeaveHandler} onDrop={onDropHandler} onDragEnter={onDragEnterHandler} onDragOver={onDragOverHandler}>
+      <h3>{state}</h3>
+      <div className='mt-4'>
+        {tasks?.map((task) => {
+          return (
+            task.state === state && <Task key={task._id} task={task} />
+          )
+        })}
+      </div>
     </div>
   )
 }

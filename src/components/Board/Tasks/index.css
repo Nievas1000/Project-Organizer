@@ -17,3 +17,15 @@
     display: flex;
     justify-content: right;
 }
+
+.hiden{
+    display: none;
+}
+
+.overlapping {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0px 0px 10px rgba(189, 189, 189, 0.2);
+    border-radius: 8px;
+    padding: 1px;
+  }

@@ -5,6 +5,7 @@ import { CreateIssueModal } from './CreateIssue'
 import { ProjectContext } from '../../context/project'
 import { NoProject } from './NoProject'
 import { Issue } from './Issue'
+import { daysUntilDate } from '../../utils/daysUntilDate'
 
 export const Backlog = () => {
   const [showCreateIssue, setCreateIssue] = useState(false)
@@ -14,9 +15,12 @@ export const Backlog = () => {
     <div className='col-md-9 pt-5 position-absolute end-0'>
       {projects && projects.length > 0
         ? <div>
-          <div>
-            <h5>Projects / {selectedProject ? selectedProject.name : null}</h5>
-            <h3>Backlog</h3>
+          <div className='d-flex'>
+            <div className='w-50'>
+              <h5>Projects / {selectedProject ? selectedProject.name : null}</h5>
+              <h3>Backlog</h3>
+            </div>
+            <h6 className='d-flex justify-content-end w-50 mt-2 me-4'>{daysUntilDate(selectedProject?.endDate)} days remaining</h6>
           </div>
           <div className='task-list-container'>
             <ul className='task-list'>

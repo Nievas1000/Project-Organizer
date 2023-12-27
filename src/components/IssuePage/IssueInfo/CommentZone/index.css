@@ -1,0 +1,22 @@
+.comment-container {
+    margin-top: 25px;
+}
+  
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+  
+.comment-author {
+    font-weight: bold;
+    margin-right: 8px;
+}
+  
+.comment-timestamp {
+    color: #888;
+}
+  
+.comment-content {
+    margin: 0;
+}
