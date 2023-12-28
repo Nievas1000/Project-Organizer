@@ -1,3 +1,12 @@
 .board-container {
-    border-right: solid 2px gray !important;
+    border-right: solid 2px #292929 !important;
+}
+.col-md-3{
+    width: 18% !important;
+}
+
+@media only screen and (max-width: 1023px) {
+    .navigator-icon{
+        display: none;
+    }
 }

@@ -17,24 +17,9 @@ const CarouselTaskMobile = () => {
 
   return (
     <Slider {...settings} className='pt-5'>
-      <div>
-        <div className='tasks-section text-center mx-3'>
-          <h3>TO DO</h3>
-          <Tasks state='TO DO' />
-        </div>
-      </div>
-      <div>
-        <div className='tasks-section text-center mx-3'>
-          <h3>IN PROGRESS</h3>
-          <Tasks state='IN PROGRESS' />
-        </div>
-      </div>
-      <div>
-        <div className='tasks-section text-center mx-3'>
-          <h3>DONE</h3>
-          <Tasks state='DONE' />
-        </div>
-      </div>
+      <Tasks state='TO DO' />
+      <Tasks state='IN PROGRESS' />
+      <Tasks state='DONE' />
     </Slider>
   )
 }

@@ -14,20 +14,20 @@ export const Navigator = () => {
         <ul className='nav flex-column'>
           <li className='nav-item' style={{ fontSize: '25px' }}>
             <Link className='nav-link text-white' to=''>
-              <TfiViewList className='me-2' />
+              <TfiViewList className='me-2 navigator-icon' />
               Backlog
             </Link>
           </li>
           <li className='nav-item' style={{ fontSize: '25px' }}>
             <Link className='nav-link text-white' to='board'>
-              <HiOutlineViewBoards className='me-2' />
+              <HiOutlineViewBoards className='me-2 navigator-icon' />
               Board
             </Link>
           </li>
           {projects && projects.length > 0 &&
             <li className='nav-item' style={{ fontSize: '25px' }}>
               <Link className='nav-link text-white' to='people'>
-                <GoPeople className='me-2' />
+                <GoPeople className='me-2 navigator-icon' />
                 People
               </Link>
             </li>}

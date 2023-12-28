@@ -1,9 +1,10 @@
 import { IoMdClose } from 'react-icons/io'
 import './index.css'
 import { useProject } from '../../../hooks/useProject'
+import { getCurrentDate } from '../../../utils/currentDate'
 
 export const CreateProjectModal = ({ setCreateProject }) => {
-  const { handleChange, projectData, createProject, error } = useProject(setCreateProject)
+  const { handleChange, projectData, createProject, error, apiError } = useProject(setCreateProject)
   return (
     <div className='container-create-project'>
       <div className='create-project'>
@@ -28,9 +29,11 @@ export const CreateProjectModal = ({ setCreateProject }) => {
             name='endDate'
             value={projectData.endDate || ''}
             onChange={handleChange}
+            min={getCurrentDate()}
           />
           {error.exist && error.fields.endDate !== '' && <span className='error-message'>{error.fields.endDate}</span>}
         </div>
+        {apiError !== '' && <span className='error-message'>{apiError}</span>}
         <div className='container-create-button'>
           <button onClick={createProject}>Create project</button>
         </div>

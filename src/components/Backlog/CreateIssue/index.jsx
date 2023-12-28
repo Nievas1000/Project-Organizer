@@ -1,68 +1,9 @@
 import { IoMdClose } from 'react-icons/io'
 import './index.css'
-import { useContext, useState } from 'react'
-import axios from 'axios'
-import { ProjectContext } from '../../../context/project'
+import { useCreateIssue } from '../../../hooks/useCreateIssue'
 
 export const CreateIssueModal = ({ setCreateIssue }) => {
-  const { selectedProject, setTasks, participants } = useContext(ProjectContext)
-  const [issue, setIssue] = useState({
-    name: '',
-    description: '',
-    state: 'TO DO',
-    projectId: selectedProject ? selectedProject._id : null,
-    owner: ''
-  })
-  const [error, setError] = useState({
-    exist: false,
-    fields: {
-      name: '',
-      description: '',
-      owner: ''
-    }
-  })
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setIssue({ ...issue, [name]: value })
-    updateErrorFields([name], '')
-  }
-
-  const updateErrorFields = (field, value) => {
-    setError(prevError => ({
-      ...prevError,
-      fields: {
-        ...prevError.fields,
-        [field]: value
-      }
-    }))
-  }
-
-  const createIssue = async () => {
-    if (issue.name !== '' && issue.description !== '' && issue.owner !== '') {
-      try {
-        const response = await axios.post('http://localhost:3001/task', issue)
-        if (response.status === 200) {
-          setCreateIssue(false)
-          setTasks(response.data.tasks)
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    } else {
-      error.exist = true
-      if (issue.name === '') {
-        updateErrorFields('name', 'You must enter a name!')
-      }
-      if (issue.description === '') {
-        updateErrorFields('description', 'You must enter a description!')
-      }
-      if (!issue.endDate) {
-        updateErrorFields('owner', 'You must enter an owner!')
-      }
-    }
-  }
-
+  const { error, issue, handleChange, participants, apiError, createIssue } = useCreateIssue(setCreateIssue)
   return (
     <div className='container-create-task'>
       <div className='create-task'>
@@ -92,6 +33,7 @@ export const CreateIssueModal = ({ setCreateIssue }) => {
           </select>
           {error.exist && error.fields.owner !== '' && <span className='error-message d-flex'>{error.fields.owner}</span>}
         </div>
+        {apiError !== '' && <span className='error-message d-flex'>{apiError}</span>}
         <div className='container-create-button'>
           <button className='btn btn-dark' onClick={createIssue}>Create</button>
         </div>

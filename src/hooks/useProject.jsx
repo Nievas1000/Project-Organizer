@@ -7,6 +7,7 @@ import { ProjectContext } from '../context/project'
 export const useProject = (setCreateProject) => {
   const { user } = useAuth()
   const { setProjects } = useContext(ProjectContext)
+  const [apiError, setApiError] = useState('')
   const [error, setError] = useState({
     exist: false,
     fields: {
@@ -41,14 +42,15 @@ export const useProject = (setCreateProject) => {
   const createProject = async () => {
     if (projectData.name !== '' && projectData.description !== '' && projectData.endDate !== '') {
       try {
-        setProjects(projectData)
         projectData.userId = user.id
         const response = await axios.post('http://localhost:3001/project', projectData)
         if (response.status === 200) {
+          setProjects((prevProjects) => [...prevProjects, response.data.project])
           setCreateProject(false)
         }
       } catch (error) {
         console.log(error)
+        setApiError(error.response.data.error)
       }
     } else {
       error.exist = true
@@ -64,5 +66,5 @@ export const useProject = (setCreateProject) => {
     }
   }
 
-  return { handleChange, createProject, projectData, error }
+  return { handleChange, createProject, projectData, error, apiError }
 }
