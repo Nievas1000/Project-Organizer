@@ -6,7 +6,7 @@
   }
   
   .spinner {
-    font-size: 3rem;
+    font-size: 100px !important;
     color: white; /* Cambia el color a blanco */
     animation: spin 1s linear infinite;
   }

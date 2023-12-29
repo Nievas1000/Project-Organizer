@@ -18,3 +18,19 @@
     font-weight: bold;
 }
 
+
+
+@media only screen and (max-width: 700px) {
+    .participant-item{
+        position: relative;
+        margin-top: 80px !important;
+    }
+    .buttons-participants{
+        display: grid;
+    }
+    .buttons-participants button{
+        width: 100%;
+        margin: 5px;
+    }
+}
+

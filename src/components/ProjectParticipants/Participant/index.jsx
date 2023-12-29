@@ -19,14 +19,14 @@ export const Participant = ({ participant, isAdmin, selectedProject }) => {
     }
   }
   return (
-    <div className='participant-item mt-4'>
+    <div className='participant-item'>
       <FaUserTie className='participant-icon' />
       <div>
         <p className='participant-name'>{participant.name}</p>
         <p className='participant-email'>{participant.email}</p>
       </div>
       {isAdmin &&
-        <div className='position-absolute end-0'>
+        <div className='position-absolute end-0 buttons-participants'>
           {!participantAdmin && <button className='btn btn-secondary me-2' onClick={addAdmin}>Set Admin</button>}
           <button className='btn btn-danger me-5' onClick={() => setShowDeleteModal(true)}>Remove</button>
         </div>}

@@ -8,6 +8,7 @@ import { SignUp } from './components/SignUp'
 import { PrivateRoute } from './components/PrivateRoute'
 import { PublicRoute } from './components/PublicRoute'
 import { ProjectParticipants } from './components/ProjectParticipants'
+import { Projects } from './components/Projects'
 
 function App () {
   return (
@@ -25,6 +26,9 @@ function App () {
             <Route path='board/task/:id' element={<IssuePage />} />
             <Route path='task/:id' element={<IssuePage />} />
             <Route path='people' element={<ProjectParticipants />} />
+          </Route>
+          <Route path='projects' element={<Projects />}>
+            <Route path=':id' element={<Projects />} />
           </Route>
         </Route>
       </Routes>

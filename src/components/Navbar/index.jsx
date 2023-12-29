@@ -5,14 +5,18 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { MobileNavigator } from './MobileNavigator'
 import { useNavbar } from '../../hooks/useNavbar'
 import { UserMenu } from './UserMenu'
+import { SettingsMenu } from './SettingsMenu/Index'
+import { Link } from 'react-router-dom'
+
 export const Navbar = () => {
   const { selectProject, signOut, showCreateProject, setCreateProject, projects, selectedProject, showBoardMobile, setShowBoardMobile, user } = useNavbar()
+
   return (
     <div>
       <div className='navbar-container d-flex pt-3'>
-        <div className='ms-4'>
+        <Link to='/home' className='ms-4'>
           <img src={logo} height={80} width={100} />
-        </div>
+        </Link>
         <div className='d-flex align-items-center'>
           {projects && projects.length > 0 &&
             <div className='d-none d-md-flex ms-5'>
@@ -34,7 +38,10 @@ export const Navbar = () => {
           <div className='d-none d-md-flex align-items-center'>
             <span onClick={() => setCreateProject(!showCreateProject)} className='create pointer'>Create</span>
           </div>
-          <UserMenu user={user} signOut={signOut} />
+          <div className='d-flex align-items-center position-absolute end-0 me-4'>
+            <SettingsMenu />
+            <UserMenu user={user} signOut={signOut} />
+          </div>
         </div>
         <div className='position-absolute end-0 me-3 mt-4 d-block d-md-none pointer'>
           <GiHamburgerMenu size={30} onClick={() => setShowBoardMobile(!showBoardMobile)} />

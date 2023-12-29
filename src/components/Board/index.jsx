@@ -14,7 +14,7 @@ const Board = () => {
   }
 
   return (
-    <div className='col-md-9 d-flex justify-content-center pt-5'>
+    <div className='col-md-9 ms-5 d-flex justify-content-end pt-5'>
       <Tasks state='TO DO' />
       <Tasks state='IN PROGRESS' />
       <Tasks state='DONE' />

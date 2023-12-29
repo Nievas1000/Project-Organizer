@@ -8,7 +8,7 @@ export const Form = () => {
         ? (
           <input
             type='password'
-            className='input-login'
+            className='input-login mt-2'
             placeholder={passwordExist ? 'Enter password' : 'Create a password to your account'}
             value={user.password}
             onChange={handlePasswordChange}
@@ -17,7 +17,7 @@ export const Form = () => {
         : (
           <input
             type='text'
-            className='input-login'
+            className='input-login mt-2'
             placeholder='Enter email'
             value={user.email}
             onChange={(e) => setUserData({ ...user, email: e.target.value })}

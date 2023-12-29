@@ -6,6 +6,7 @@ import { ProjectContext } from '../context/project'
 export const useNavbar = () => {
   const navigate = useNavigate()
   const [showMenu, setShowMenu] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
   const [showCreateProject, setCreateProject] = useState(false)
   const { setIsAuthenticated, user } = useAuth()
   const { projects, setSelectedProject, selectedProject, showBoardMobile, setShowBoardMobile } = useContext(ProjectContext)
@@ -22,5 +23,18 @@ export const useNavbar = () => {
     navigate('/login')
   }
 
-  return { selectProject, signOut, showCreateProject, setCreateProject, projects, setSelectedProject, selectedProject, showBoardMobile, setShowBoardMobile, user }
+  return {
+    selectProject,
+    signOut,
+    showCreateProject,
+    setCreateProject,
+    projects,
+    setSelectedProject,
+    selectedProject,
+    showBoardMobile,
+    setShowBoardMobile,
+    user,
+    setShowSettings,
+    showSettings
+  }
 }

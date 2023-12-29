@@ -1,0 +1,57 @@
+.project-details-container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.project-details-container p{
+    font-size: 25px;
+    font-weight: bol;
+}
+.project-navbar{
+    font-size: 20px;
+    cursor: pointer;
+    border-bottom: solid 1px #9c9c9c;
+}
+
+.project-navbar span {
+    margin-right: 25px;
+    margin-bottom: -1px;
+    cursor: pointer;
+    transition: color 0.3s, border-bottom 0.3s;
+    color: #9c9c9c;
+}
+  
+.project-navbar span:hover {
+    color: #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+}
+  
+.project-navbar span.active {
+    color: #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.container-tasks{
+    padding: 10px;
+    height: 300px;
+    overflow: auto;
+}
+
+.container-tasks::-webkit-scrollbar {
+    width: 6px; /* Ancho de la barra de desplazamiento */
+}
+  
+.container-tasks::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color del pulgar (barra deslizable) */
+    border-radius: 6px; /* Bordes redondeados del pulgar */
+}
+  
+.container-tasks::-webkit-scrollbar-track {
+    background-color: transparent; /* Color de la pista (fondo de la barra) */
+}
+  
+  /* Cambia el color del pulgar al pasar el ratón sobre él */
+.container-tasks::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+  

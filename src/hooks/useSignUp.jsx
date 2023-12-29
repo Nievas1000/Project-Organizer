@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from './useAuth'
 import { saveToLocalStorage } from '../utils/localStorage'
+import { isGmail } from '../utils/gmailValidation'
 
 export const useSignUp = () => {
   const { setIsAuthenticated, setUser } = useAuth()
@@ -17,7 +18,7 @@ export const useSignUp = () => {
   })
 
   const handleContinue = async () => {
-    if (user.email !== '') {
+    if (user.email !== '' && isGmail(user.email)) {
       try {
         const response = await axios.post('http://localhost:3001/userByEmail', { email: user.email })
         const data = response.data
@@ -32,6 +33,8 @@ export const useSignUp = () => {
         console.log(error)
         setError(error.response.data.message)
       }
+    } else {
+      setError('Enter a valid email!')
     }
   }
 

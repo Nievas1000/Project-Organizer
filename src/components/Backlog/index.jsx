@@ -12,7 +12,7 @@ export const Backlog = () => {
   const { tasks, selectedProject, projects } = useContext(ProjectContext)
 
   return (
-    <div className='col-md-9 pt-5 position-absolute end-0'>
+    <div className='col-md-9 pt-5'>
       {projects && projects.length > 0
         ? <div>
           <div className='d-flex'>
@@ -20,7 +20,7 @@ export const Backlog = () => {
               <h5>Projects / {selectedProject ? selectedProject.name : null}</h5>
               <h3>Backlog</h3>
             </div>
-            <h6 className='d-flex justify-content-end w-50 mt-2 me-4'>{daysUntilDate(selectedProject?.endDate)} days remaining</h6>
+            <h6 className='position-absolute end-0 me-5 mt-2'>{daysUntilDate(selectedProject?.endDate)} days remaining</h6>
           </div>
           <div className='task-list-container'>
             <ul className='task-list'>

@@ -11,8 +11,8 @@ export const ProjectParticipants = () => {
   const { user } = useAuth()
 
   return (
-    <div className='col-md-9 pt-5 position-absolute end-0 d-flex'>
-      <div>
+    <div className='col-md-9 pt-5 d-flex'>
+      <div className='w-100'>
         <h1>All People</h1>
         {participants && participants.length > 0
           ? (
@@ -29,7 +29,7 @@ export const ProjectParticipants = () => {
             )}
       </div>
       {selectedProject?.admins.includes(user.email) &&
-        <div className='position-absolute end-0 top-0 mt-5 me-5'>
+        <div className='position-absolute end-0 me-5'>
           <button className='btn btn-dark' onClick={() => setShowModal(true)}>Add People</button>
         </div>}
       {showModal && <AddUsersModal setShowModal={setShowModal} />}
