@@ -11,8 +11,8 @@ export const ProjectParticipants = () => {
   const { user } = useAuth()
 
   return (
-    <div className='col-md-9 pt-5 d-flex'>
-      <div className='w-100'>
+    <div className='col-md-9 pt-5 d-block d-md-flex'>
+      <div style={{ width: '80%' }}>
         <h2>{participants && participants.length > 1 ? 'All People' : 'Add participants to your project and you will see them here'}</h2>
         {participants && participants.length > 1 &&
           (

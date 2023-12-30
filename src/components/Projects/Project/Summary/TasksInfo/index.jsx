@@ -1,11 +1,12 @@
 import { Issue } from '../../../../Backlog/Issue'
 import { GraphicTasks } from '../GraphicTasks/GraphicTasks'
+import './index.css'
 
 export const TasksInfo = ({ tasks }) => {
   return (
     <div className='container-fluid d-block d-md-flex pt-5'>
-      <div className='w-50 '>
-        <h2>Issues</h2>
+      <div className='issue-container'>
+        <h2 className='d-flex justify-content-center'>Issues</h2>
         <div className='container-tasks mt-5'>
           <div>
             {tasks.map((task) => {
@@ -16,7 +17,7 @@ export const TasksInfo = ({ tasks }) => {
           </div>
         </div>
       </div>
-      <div className='w-50 ps-5'>
+      <div className='graphic-container'>
         <GraphicTasks tasks={tasks} />
       </div>
     </div>

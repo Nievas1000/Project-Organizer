@@ -8,7 +8,7 @@ export const GraphicTasks = ({ tasks }) => {
   const { data } = useGraphic(tasks)
   return (
     <div>
-      <h2>Graphic Data</h2>
+      <h2 className='d-flex justify-content-center'>Graphic Data</h2>
       <div className='d-flex justify-content-center mt-5' style={{ height: '300px' }}>
         <Doughnut data={data} />
       </div>

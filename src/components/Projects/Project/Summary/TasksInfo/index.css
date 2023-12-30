@@ -1,0 +1,15 @@
+.issue-container{
+    width: 50%;
+}
+.graphic-container{
+    width: 50%;
+}
+
+@media only screen and (max-width: 768px){
+    .issue-container{
+        width: 100%;
+    }
+    .graphic-container{
+        width: 100%;
+    }
+}
