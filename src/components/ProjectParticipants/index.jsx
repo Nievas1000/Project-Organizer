@@ -13,9 +13,9 @@ export const ProjectParticipants = () => {
   return (
     <div className='col-md-9 pt-5 d-flex'>
       <div className='w-100'>
-        <h1>All People</h1>
-        {participants && participants.length > 0
-          ? (
+        <h2>{participants && participants.length > 1 ? 'All People' : 'Add participants to your project and you will see them here'}</h2>
+        {participants && participants.length > 1 &&
+          (
             <div className='participant-list mt-5'>
               {participants
                 .filter(participant => user.id !== participant._id)
@@ -23,10 +23,7 @@ export const ProjectParticipants = () => {
                   <Participant key={index} participant={participant} isAdmin={selectedProject.admins.includes(user.email)} selectedProject={selectedProject} />
                 ))}
             </div>
-            )
-          : (
-            <p>No participants available.</p>
-            )}
+          )}
       </div>
       {selectedProject?.admins.includes(user.email) &&
         <div className='position-absolute end-0 me-5'>
