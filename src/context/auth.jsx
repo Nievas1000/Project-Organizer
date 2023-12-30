@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         if (tokenMatch && tokenMatch[1] && storedUser) {
           setUser(storedUser)
           const token = tokenMatch[1]
-          const response = await fetch('http://localhost:3001/checkLogin', {
+          const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}checkLogin`, {
             method: 'POST',
             headers: {
               Authorization: token

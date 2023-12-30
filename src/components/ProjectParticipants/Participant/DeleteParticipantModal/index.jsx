@@ -9,7 +9,7 @@ export const DeleteParticipantModal = ({ setShowDeleteModal, participant }) => {
 
   const deleteParticipant = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/removeProject', { userId: participant._id, projectId: selectedProject._id })
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}removeProject`, { userId: participant._id, projectId: selectedProject._id })
       if (response.status === 200) {
         setParticipants((prevParticpants) => prevParticpants.filter((currentParticipant) => currentParticipant._id !== participant._id))
         setShowDeleteModal(false)

@@ -40,7 +40,7 @@ export const useCreateIssue = (setCreateIssue) => {
   const createIssue = async () => {
     if (issue.name !== '' && issue.description !== '' && issue.owner !== '') {
       try {
-        const response = await axios.post('http://localhost:3001/task', issue)
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}task`, issue)
         if (response.status === 200) {
           setCreateIssue(false)
           setTasks(response.data.tasks)

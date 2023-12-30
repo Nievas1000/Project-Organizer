@@ -11,7 +11,7 @@ export const Actions = ({ project, setProject }) => {
 
   const editProject = async () => {
     try {
-      const response = await axios.put(`http://localhost:3001/project/${project._id}`, { name: editedTitle, description: editedDescription })
+      const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}project/${project._id}`, { name: editedTitle, description: editedDescription })
       if (response.status === 200) {
         project.name = editedTitle
         project.description = editedDescription

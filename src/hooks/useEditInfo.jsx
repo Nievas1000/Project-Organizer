@@ -17,7 +17,7 @@ export const useEditInfo = () => {
 
   const updateOwner = async () => {
     try {
-      const response = await axios.put(`http://localhost:3001/updateOwner/${task._id}`, { email: owner })
+      const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}updateOwner/${task._id}`, { email: owner })
       if (response.status === 200) {
         task.owner.email = owner
         task.owner.name = response.data.owner
@@ -34,7 +34,7 @@ export const useEditInfo = () => {
 
   const updateStatus = async () => {
     try {
-      const response = await axios.put(`http://localhost:3001/updateStatus/${task._id}`, { state })
+      const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}updateStatus/${task._id}`, { state })
       if (response.status === 200) {
         task.state = response.data.task.state
         const taskIndex = tasks.findIndex((taskCurrent) => taskCurrent._id === task._id)
@@ -50,7 +50,7 @@ export const useEditInfo = () => {
   const addComment = async (task) => {
     if (comment !== '') {
       try {
-        const response = await axios.post(`http://localhost:3001/addComment/${task._id}`, { name: user.name, email: user.email, comment })
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}addComment/${task._id}`, { name: user.name, email: user.email, comment })
         if (response.status === 200) {
           task.comments.push({
             id: response.data.comment.id, name: user.name, email: user.email, comment, date: new Date()

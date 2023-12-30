@@ -15,7 +15,7 @@ export const ProjectProvider = ({ children }) => {
   const getTasksByProject = async () => {
     try {
       if (selectedProject) {
-        const response = await axios.get(`http://localhost:3001/task/${selectedProject._id}`)
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}task/${selectedProject._id}`)
         setTasks(response.data)
       }
     } catch (error) {
@@ -26,7 +26,7 @@ export const ProjectProvider = ({ children }) => {
   const getUsersByProject = async () => {
     try {
       if (selectedProject) {
-        const response = await axios.get(`http://localhost:3001/usersByProject/${selectedProject._id}`)
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}usersByProject/${selectedProject._id}`)
         setParticipants(response.data)
       }
     } catch (error) {
@@ -36,7 +36,7 @@ export const ProjectProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:3001/projects/${user.id}`).then(response => response.json()).then(data => {
+      fetch(`${import.meta.env.VITE_API_BASE_URL}projects/${user.id}`).then(response => response.json()).then(data => {
         setProjects(data)
         if (data.length > 0) {
           setSelectedProject(data[0])

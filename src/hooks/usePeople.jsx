@@ -8,7 +8,7 @@ export const usePeople = (setShowModal) => {
 
   const addPeople = async (participant) => {
     try {
-      const response = await axios.post('http://localhost:3001/addProject', { email: participant.email, projectId: selectedProject._id })
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}addProject`, { email: participant.email, projectId: selectedProject._id })
       if (response.status === 200) {
         setParticipants((prevParticipants) => [...prevParticipants, participant])
         setShowModal(false)
@@ -19,7 +19,7 @@ export const usePeople = (setShowModal) => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3001/usersNoProject/${selectedProject._id}`, { method: 'POST' }).then(response => response.json()).then(data => {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}usersNoProject/${selectedProject._id}`, { method: 'POST' }).then(response => response.json()).then(data => {
       if (data.length > 0) {
         setPeople(data)
       }

@@ -19,7 +19,7 @@ export const Comment = ({ comment, task, setTask }) => {
 
   const saveEditComment = async () => {
     try {
-      const response = await axios.post(`http://localhost:3001/editComment/${task._id}/${comment.id}`, { editedComment: editComment })
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}editComment/${task._id}/${comment.id}`, { editedComment: editComment })
       console.log(response)
       if (response.status === 200) {
         comment.comment = editComment
@@ -32,7 +32,7 @@ export const Comment = ({ comment, task, setTask }) => {
 
   const deleteComment = async () => {
     try {
-      const response = await axios.delete(`http://localhost:3001/deleteComment/${task._id}/${comment.id}`)
+      const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}deleteComment/${task._id}/${comment.id}`)
       console.log(response)
       if (response.status === 200) {
         setTask(response.data.task)

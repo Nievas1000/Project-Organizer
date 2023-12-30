@@ -26,7 +26,7 @@ export const useBoard = (state) => {
       const updatedTasks = [...tasks]
       tasks[taskIndex].state = state
       setTasks(updatedTasks)
-      await axios.put(`http://localhost:3001/updateStatus/${draggableData.id}`, { state })
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}updateStatus/${draggableData.id}`, { state })
     }
   }
 

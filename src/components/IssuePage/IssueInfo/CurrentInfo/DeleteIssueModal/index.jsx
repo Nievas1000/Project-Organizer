@@ -11,7 +11,7 @@ export const DeleteIssueModal = ({ setShowDeleteModal, task }) => {
 
   const deleteTask = async () => {
     try {
-      const response = await axios.delete(`http://localhost:3001/task/${task._id}`)
+      const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}task/${task._id}`)
       if (response.status === 200) {
         setTasks((prevTasks) => prevTasks.filter((currentTask) => currentTask._id !== task._id))
         navigate(-1)

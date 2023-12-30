@@ -20,7 +20,7 @@ export const useSignUp = () => {
   const handleContinue = async () => {
     if (user.email !== '' && isGmail(user.email)) {
       try {
-        const response = await axios.post('http://localhost:3001/userByEmail', { email: user.email })
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}userByEmail`, { email: user.email })
         const data = response.data
         if (data.exist === true) {
           setShowPasswordInput(false)
@@ -46,7 +46,7 @@ export const useSignUp = () => {
     console.log(user)
     if (user.name !== '' && user.password !== '') {
       try {
-        const response = await axios.post('http://localhost:3001/user', user)
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}user`, user)
         if (response.status === 200) {
           document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
           setIsAuthenticated(true)
@@ -66,7 +66,7 @@ export const useSignUp = () => {
   const handleGoogleSignup = async (credentialResponse) => {
     try {
       const credentialDecode = jwtDecode(credentialResponse.credential)
-      let response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email, isExternal: true })
+      let response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}userByEmail`, { email: credentialDecode.email, isExternal: true })
       const data = response.data
       if (data.exist === true) {
         document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
@@ -75,7 +75,7 @@ export const useSignUp = () => {
         setUser(response.data.user)
         navigate('/home')
       } else {
-        response = await axios.post('http://localhost:3001/user', { email: credentialDecode.email, name: credentialDecode.name, imagen: credentialDecode.imagen })
+        response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}user`, { email: credentialDecode.email, name: credentialDecode.name, imagen: credentialDecode.imagen })
         if (response.status === 200) {
           document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
           setIsAuthenticated(true)

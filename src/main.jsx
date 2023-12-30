@@ -10,12 +10,11 @@ import { AuthProvider } from './context/auth.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <GoogleOAuthProvider clientId='189304055061-1m8kjtpmnu9t1uh56mjmspd72v85n0h4.apps.googleusercontent.com'>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <AuthProvider>
         <ProjectProvider>
           <App />
         </ProjectProvider>
-
       </AuthProvider>
     </GoogleOAuthProvider>
   </BrowserRouter>

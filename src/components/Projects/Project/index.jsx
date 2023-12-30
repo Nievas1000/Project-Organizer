@@ -16,7 +16,7 @@ export const Project = ({ id }) => {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:3001/project/${id}`).then(response => response.json()).then(data => {
+      fetch(`${import.meta.env.VITE_API_BASE_URL}project/${id}`).then(response => response.json()).then(data => {
         setProject(data.project)
         setLeader(data.leader)
         setTasks(data.tasks)

@@ -43,7 +43,7 @@ export const useProject = (setCreateProject) => {
     if (projectData.name !== '' && projectData.description !== '' && projectData.endDate !== '') {
       try {
         projectData.userId = user.id
-        const response = await axios.post('http://localhost:3001/project', projectData)
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}project`, projectData)
         if (response.status === 200) {
           setProjects((prevProjects) => [...prevProjects, response.data.project])
           setCreateProject(false)

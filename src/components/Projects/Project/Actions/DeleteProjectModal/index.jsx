@@ -11,7 +11,7 @@ export const DeleteProjectModal = ({ setShowDeleteModal, project }) => {
 
   const deleteProject = async () => {
     try {
-      const response = await axios.delete(`http://localhost:3001/project/${project._id}`)
+      const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}project/${project._id}`)
       if (response.status === 200) {
         setProjects((prevProejcts) => prevProejcts.filter((projectsCurrent) => projectsCurrent._id !== project._id))
         navigate(-1)

@@ -21,7 +21,7 @@ export const useLogin = () => {
   useGoogleOneTapLogin({
     onSuccess: async credentialResponse => {
       const credentialDecode = jwtDecode(credentialResponse.credential)
-      const response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email, isExternal: true })
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}userByEmail`, { email: credentialDecode.email, isExternal: true })
       const data = response.data
       if (response.status === 200 && data.exist === true) {
         document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
@@ -40,7 +40,7 @@ export const useLogin = () => {
     if (user.email !== '' && user.email.length > 12 && isGmail(user.email)) {
       try {
         setError(null)
-        const response = await axios.post('http://localhost:3001/userByEmail', { email: user.email })
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}userByEmail`, { email: user.email })
         const data = response.data
         if (data.exist === true) {
           setShowPasswordInput(true)
@@ -68,9 +68,9 @@ export const useLogin = () => {
       try {
         let response = null
         if (passwordExist) {
-          response = await axios.post('http://localhost:3001/login', user)
+          response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}login`, user)
         } else {
-          response = await axios.put('http://localhost:3001/addPassword', { email: user.email, password: user.password })
+          response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}addPassword`, { email: user.email, password: user.password })
         }
         if (response.status === 200) {
           document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
@@ -92,7 +92,7 @@ export const useLogin = () => {
   const handleGoogleLogin = async (credentialResponse) => {
     try {
       const credentialDecode = jwtDecode(credentialResponse.credential)
-      const response = await axios.post('http://localhost:3001/userByEmail', { email: credentialDecode.email, isExternal: true })
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}userByEmail`, { email: credentialDecode.email, isExternal: true })
       const data = response.data
       if (response.status === 200 && data.exist === true) {
         document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`

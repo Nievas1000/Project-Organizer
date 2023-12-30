@@ -13,7 +13,7 @@ export const People = ({ project }) => {
 
   useEffect(() => {
     if (project) {
-      fetch(`http://localhost:3001/usersByProject/${project._id}`).then(response => response.json()).then(data => {
+      fetch(`${import.meta.env.VITE_API_BASE_URL}usersByProject/${project._id}`).then(response => response.json()).then(data => {
         setParticipantsPro(data)
       })
     }

@@ -18,7 +18,7 @@ export const EditInfo = ({ task, editedTitle, setEditedTitle, setEditedDescripti
 
   const editTask = async () => {
     try {
-      const response = await axios.put(`http://localhost:3001/task/${task._id}`, { name: editedTitle, description: editedDescription })
+      const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}task/${task._id}`, { name: editedTitle, description: editedDescription })
       if (response.status === 200) {
         task.name = editedTitle
         task.description = editedDescription

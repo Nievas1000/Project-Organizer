@@ -19,7 +19,7 @@ export const useIssue = (task, setShowModal) => {
 
   const handleSaveChanges = async () => {
     try {
-      const response = await axios.put(`http://localhost:3001/task/${task._id}`, editedTask)
+      const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}task/${task._id}`, editedTask)
       if (response.status === 200) {
         task.owner = editedTask.owner
         task.name = editedTask.name
