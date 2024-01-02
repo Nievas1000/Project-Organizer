@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { getFromLocalStorage } from '../utils/localStorage'
 
 export const AuthContext = createContext()
@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [user, setUser] = useState()
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -26,13 +27,14 @@ export const AuthProvider = ({ children }) => {
 
           if (response.ok) {
             setIsAuthenticated(true)
+            navigate(location.pathname)
           } else {
             setIsAuthenticated(false)
-            navigate('/login')
+            navigate(location.pathname)
           }
         } else {
           setIsAuthenticated(false)
-          navigate('/login')
+          navigate(location.pathname)
         }
       } catch (error) {
         console.error('Error al verificar la autenticación:', error)
