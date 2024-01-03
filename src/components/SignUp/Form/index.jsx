@@ -10,7 +10,7 @@ export const Form = () => {
             <input
               type='text'
               className='input-signup'
-              placeholder='Enter you name'
+              placeholder='Enter your name'
               value={user.name}
               onChange={(e) => setUserData({ ...user, name: e.target.value })}
             />

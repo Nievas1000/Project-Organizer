@@ -43,7 +43,6 @@ export const useSignUp = () => {
   }
 
   const handleCreateUser = async () => {
-    console.log(user)
     if (user.name !== '' && user.password !== '') {
       try {
         const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}user`, user)

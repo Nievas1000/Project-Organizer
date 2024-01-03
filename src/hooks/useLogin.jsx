@@ -20,15 +20,19 @@ export const useLogin = () => {
 
   useGoogleOneTapLogin({
     onSuccess: async credentialResponse => {
-      const credentialDecode = jwtDecode(credentialResponse.credential)
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}userByEmail`, { email: credentialDecode.email, isExternal: true })
-      const data = response.data
-      if (response.status === 200 && data.exist === true) {
-        document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
-        saveToLocalStorage('user', response.data.user)
-        setUser(response.data.user)
-        setIsAuthenticated(true)
-        navigate('/home')
+      try {
+        const credentialDecode = jwtDecode(credentialResponse.credential)
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}userByEmail`, { email: credentialDecode.email, isExternal: true })
+        const data = response.data
+        if (response.status === 200 && data.exist === true) {
+          document.cookie = `token=${response.data.token}; max-age=${4 * 60 * 60 * 1000}; path=/; samesite=strict`
+          saveToLocalStorage('user', response.data.user)
+          setUser(response.data.user)
+          setIsAuthenticated(true)
+          navigate('/home')
+        }
+      } catch (error) {
+        console.log(error)
       }
     },
     onError: () => {
