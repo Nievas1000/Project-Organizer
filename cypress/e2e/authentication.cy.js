@@ -21,6 +21,6 @@ describe("Login Page", () => {
     cy.on("uncaught:exception", (err, runnable) => {
       return false;
     });
-    cy.login("test@gmail.com", "123456");
+    cy.login(Cypress.env("test_username"), Cypress.env("test_password"));
   });
 });
