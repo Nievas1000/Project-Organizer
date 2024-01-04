@@ -1,7 +1,7 @@
 describe("Signup Page", () => {
   beforeEach(() => {
-    cy.request("POST", `http://localhost:3001/refreshTest`);
-    cy.visit("http://localhost:5173/signup");
+    cy.request("POST", `${Cypress.env("api_server")}refreshTest`);
+    cy.visit("https://kira-organizer.netlify.app/signup");
   });
   it("should visit the signup page and create a user", () => {
     cy.get('[placeholder="Enter email"]').type("test@gmail.com");
@@ -15,7 +15,7 @@ describe("Signup Page", () => {
 
 describe("Login Page", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5173/login");
+    cy.visit("https://kira-organizer.netlify.app");
   });
   it("should visit the login page and login with the test user", () => {
     cy.on("uncaught:exception", (err, runnable) => {

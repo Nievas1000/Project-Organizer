@@ -25,7 +25,7 @@ export const CreateIssueModal = ({ setCreateIssue }) => {
           <h6>Owner:</h6>
           <select name='owner' value={issue.owner} onChange={handleChange}>
             <option value=''>Select owner</option>
-            {participants.map((participant) => (
+            {participants?.map((participant) => (
               <option key={participant._id} value={participant._id}>
                 {participant.name}
               </option>
@@ -35,7 +35,7 @@ export const CreateIssueModal = ({ setCreateIssue }) => {
         </div>
         {apiError !== '' && <span className='error-message d-flex'>{apiError}</span>}
         <div className='container-create-button'>
-          <button className='btn btn-dark' onClick={createIssue}>Create</button>
+          <button className='btn btn-dark' name='createIssue' onClick={createIssue}>Create</button>
         </div>
       </div>
     </div>
