@@ -46,5 +46,9 @@ jobs:
         run: npm run build
       - uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: build
+          name: dist
+          path: dist
+      - name: E2E Test
+        uses: cypress-io/github-action@v4
+        with:
+          command: npm test
