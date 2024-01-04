@@ -27,7 +27,7 @@ jobs:
       - name: Install Dependencies 
         run: npm install
       - name: Lint
-        run: npx eslint src/**/*.js
+        run: npx eslint src/**/*.jsx
 
   build:
     if: ${{ github.event_name == 'push' }}
