@@ -67,10 +67,12 @@ jobs:
         with:
           name: dist
           path: dist
-      - name: Write the cypress.env.json file
-        run: |
-          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
       - name: E2E Test
         uses: cypress-io/github-action@v4
         with:
           command: npm test
+          env: true
+        env:
+          CYPRESS_api_server: ${{secrets.API_SERVER_URL}}
+          CYPRESS_test_username: ${{secrets.TEST_USERNAME}}
+          CYPRESS_test_password: ${{secrets.TEST_PASSWORD}}
