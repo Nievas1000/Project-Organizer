@@ -48,6 +48,25 @@ jobs:
         with:
           name: dist
           path: dist
+
+  test:
+    if: ${{ github.event_name == 'push' }}
+    needs: [lint, build]
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout/@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install Dependencies 
+        run: npm install
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
       - name: E2E Test
         uses: cypress-io/github-action@v4
         with:
