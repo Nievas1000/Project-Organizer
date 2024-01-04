@@ -53,6 +53,10 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     needs: [lint, build]
     runs-on: ubuntu-latest
+    env:
+      API_SERVER: ${{ secrets.API_SERVER }}
+      TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+      TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
     steps: 
       - name: Checkout
         uses: actions/checkout/@v3
@@ -71,7 +75,3 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           command: npm test
-        env:
-          CYPRESS_api_server: ${{secrets.API_SERVER_URL}}
-          CYPRESS_test_username: ${{secrets.TEST_USERNAME}}
-          CYPRESS_test_password: ${{secrets.TEST_PASSWORD}}
