@@ -1,0 +1,50 @@
+name: KIRA CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  avoid_reduncy:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Cancel Previus Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{github.token}}
+  
+  lint:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout/@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install Dependencies 
+        run: npm ci
+      - name: Lint
+        run: npx eslint src/**/*.js
+
+  build:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout/@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install Dependencies 
+        run: npm install
+      - name: Build Static Website
+        run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
