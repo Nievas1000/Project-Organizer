@@ -1,7 +1,7 @@
 import { SlSettings } from 'react-icons/sl'
 import './index.css'
 import { useMenu } from '../../../hooks/useMenu'
-import { FaFolder, FaTasks } from 'react-icons/fa'
+import { FaFolder } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 export const SettingsMenu = () => {
@@ -15,11 +15,6 @@ export const SettingsMenu = () => {
             <Link to='/projects' className='d-flex align-items-center ms-3 mt-3'>
               <FaFolder size={25} className='mb-3' />
               <p className='ms-3'>Projects</p>
-            </Link>
-            <hr className='my-2 w-100' />
-            <Link className='d-flex align-items-center ms-3 mt-3'>
-              <FaTasks size={25} className='mb-3' />
-              <p className='ms-3'>Issues</p>
             </Link>
           </div>
         </div>
