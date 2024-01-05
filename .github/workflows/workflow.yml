@@ -68,11 +68,11 @@ jobs:
           name: dist
           path: dist
       - name: E2E Test
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
         with:
           command: npm test
           env: true
         env:
-          api_server: ${{secrets.API_SERVER_URL}}
-          test_username: ${{secrets.TEST_USERNAME}}
-          test_password: ${{secrets.TEST_PASSWORD}}
+          CYPRESS_api_server: ${{secrets.API_SERVER_URL}}
+          CYPRESS_test_username: ${{secrets.TEST_USERNAME}}
+          CYPRESS_test_password: ${{secrets.TEST_PASSWORD}}
