@@ -50,7 +50,6 @@ jobs:
           path: dist
 
   test:
-    if: ${{ github.event_name == 'push' }}
     needs: [lint, build]
     runs-on: ubuntu-latest
     steps: 
@@ -76,3 +75,27 @@ jobs:
           CYPRESS_api_server: ${{secrets.API_SERVER_URL}}
           CYPRESS_test_username: ${{secrets.TEST_USERNAME}}
           CYPRESS_test_password: ${{secrets.TEST_PASSWORD}}
+
+  deploy:
+    if: ${{ github.event_name == 'push' }}
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout/@v3
+        with:
+          fetch-depth: 0
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: './dist'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
