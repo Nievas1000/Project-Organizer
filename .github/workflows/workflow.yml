@@ -77,6 +77,8 @@ jobs:
           CYPRESS_test_password: ${{secrets.TEST_PASSWORD}}
 
   deploy:
+    if: ${{ github.event_name == 'push' }}
+    needs: [lint, build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
